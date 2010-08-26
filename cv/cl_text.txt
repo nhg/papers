@@ -1,0 +1,29 @@
+Machine-learning consultant seeking contract work
+
+I received my PhD in machine learning/sequential decision-making at the end of 2007, and since then, have been working on developing trading indicators with a financial research group and, more recently, teaching at the university level. My background includes work in robotic path-planning/navigation, reinforcement learning, clustering, classification, and time-series analysis.  
+I've learned my passion lies in applying machine learning techniques to concrete problems, and I am looking to take my strong quantitative background to new domain areas. I'm particularly interested in modeling/optimization problems in the area of energy efficiency and distribution (e.g., "smart grid" technologies), but I am also seeking experience in internet search engines, recommender systems, and portfolio risk-minimization, for example.
+
+Below is a summary of my CV. For more details and contact info, please send an email.
+
+Academic Background:
+* PhD in Electrical Engineering and Computer Science, Dec 2007 
+  Massachusetts Institute of Technology, Cambridge, MA 
+
+* MS in Electrical Engineering and Computer Science, Feb 2003 
+  Massachusetts Institute of Technology, Cambridge, MA
+
+* BS in Computer Science and Engineering, with high honors, Dec 1999 
+  Michigan State University, East Lansing, MI
+
+Professional Experience:
+* Visiting Professor/Postdoctoral Associate, March 2010 - July 2010 
+  Universitat Pompeu Fabra, Barcelona, Spain
+
+* Assistant Vice President, May 2008 - Feb 2010 
+  State Street Associates, Cambridge, MA 
+
+* Postdoctoral Associate, Jan 2008 - May 2008 
+  Massachusetts Institute of Technology, Cambridge, MA
+
+Research Interests
+ Decision-making under uncertainty, Probabilistic models, Reinforcement learning, Planning, Inference.

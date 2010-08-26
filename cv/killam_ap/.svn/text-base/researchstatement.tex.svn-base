@@ -1,0 +1,154 @@
+\documentclass[12pt]{article}
+%\usepackage{my}
+\usepackage{fullpage}
+\usepackage{simplemargins}
+
+\usepackage{graphicx} % standard LaTeX graphics tool
+                      % for including eps-figure files
+
+
+
+\usepackage{fancyvrb}
+\usepackage{url}
+\usepackage{epsf}
+\usepackage{epsfig}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+
+
+\setallmargins{.75in}
+\renewcommand{\baselinestretch}{1.8} 
+
+%kill the date
+\renewcommand{\today}{\vspace{-.75in}}
+%\renewcommand{\topmargin}{.1in}
+%\renewcommand{\textheight}{10in}
+%\renewcommand{\headheight}{.1in}
+%\renewcommand{\headsep}{.1in}
+
+%\pagestyle{fancy}
+%\headheight{.25in} 
+%\lhead{Research Statement} %\rhead{August 2005}\chead{{\bf My Name}} \lfoot{} \rfoot{\bf \thepage} \cfoot{}
+
+
+
+\def\mdp{{\sc mdp}}
+
+
+\begin{document}
+  
+%\title{{{\large{Natalia H. Gardiol \\ Research Statement}}}}
+\title{\vspace{-.5in} \normalsize{Natalia H. Gardiol: Research Statement}}
+%\title{ \normalsize{Natalia H. Gardiol \\ Research Statement}}
+
+
+\maketitle
+
+\vspace{-.25in}
+
+%%  1. planning is important. The kinds of planning I'm about to tell you I do are especially important.
+
+In the field of Artificial Intelligence, the problem of planning has been a fundamental research area 
+since the inception of the field.  It addresses decision-making at its most basic: how can an artificial agent identify the best sequence of states and actions in order to achieve a goal?  And how can it do so when its environment may change in both expected and unexpected ways?
+%The insights that arise from tackling this question impact a vast range of applications, from robot navigation to large-scale information acquisition to models of human cognition.  
+
+
+Unfortunately, even in the seemingly simplest formal setting,
+%assuming a deterministic environment and a restricted subset of propositional logic for expressing the goals and transition rules, 
+planning has
+been found to be a {\sc pspace}-complete problem~\cite{bylander94}. 
+%That is, even assuming a deterministic environment, it is effectively impossible to find an optimal plan in general.
+ %Nonetheless, there is a large body of work on search techniques that are effective when some problem-specific information is assumed.  Additionally, 
+ Nonetheless, given a deterministic environment and a small amount of problem-specific information, traditional AI planning techniques have been able to
+make headway in very large state spaces, largely due to powerful first-order logical
+representations that enable structural features of the state and
+action spaces to be exploited for efficiency. 
+%The drawback is that an assumption of determinism is still at the core of these classical techniques, whereas the real world is anything but.
+
+
+In contrast, work
+in the operations research ({\sc or}) community has developed the framework
+of Markov decision processes (\mdp s)~\cite{puterman94book} to specifically address uncertainty in dynamical
+systems.  
+%Being able to address uncertainty (not only in acting, but, also in sensing) 
+This is a key requirement for any system to be applicable to a wide range of real-world problems. 
+However, a large number of states in combination with many uncertain actions
+%, each of which may have a variety of potential outcomes, 
+yields too large a decision space for standard techniques to handle at once.
+
+%% 3. very briefly, some of my key achievements in my PhD work were
+
+In my thesis research, I sought to integrate the {\sc ai} and {\sc or} approaches by building on the strengths of each in turn: we bootstrap a complex probabilistic decision-making problem from  a deterministic approximation of the original problem. 
+%Classical techniques, using a first-order logic representation of observations and transitions, can be used to cover the space \emph{optimistically} at first, in broad steps. 
+%A solution found with this approximation identifies a relevant subset of the whole state space and initializes an \mdp. 
+As computational resources permit, the algorithm explores the states surrounding the initial, approximate, solution, incrementally making its plan more robust.
+%The result was a systematic way to, first, reduce a probabilistic problem with many features to simplified, deterministic problem with a reduced feature set; and second, to gradually build complexity back in once an initial, approximate solution was found. 
+A principal advantage over either traditional approach is 
+%that the agent can begin acting any time after the initial, rough, approximation is found, and 
+a systematic way to trade off the quality of behavior for speed of response; the ability to begin acting as quickly as possible and to improve with time is an asset in many domains. 
+We showed substantial efficiency gains in several benchmark planning problems and in a novel military logistics problem derived from the U.S. Naval Research Lab's TIELT challenge domain~\cite{molineaux}.
+
+
+%The essential idea is that complex domains will require an artificial agent to have adaptive aspirations: if the agent is under time pressure to act, then, we must be willing to accept some trade-off in the quality of behavior for speed of response. However, as time goes on, we would expect the agents behavior to become more robust and to improve in quality. This is known in the literature as an \emph{anytime} algorithm~\cite{dean88}.
+
+
+%%  2. my main research theme has been X (I'd guess structured planning in domains with property Y, particularly when the structure takes form Z)
+
+%So far, the main theme in my research has been exploiting structure in order to  solve sequential decision-making tasks, particularly in domains that can be represented in terms of logical relationships between observable features and when transitions can be represented with probabilistic first-order rules. 
+%A large body of work, in addition to my own, has shown that taking advantage of structure in planning leads to great improvements in efficiency and accuracy (e.g.,~\cite{givan03aij,guestrin03ijcai,karabaev05,kersting04,rintanen04icaps,sanner05uai}). 
+
+
+So far, the main theme in my work has been exploiting structure to solve sequential decision-making tasks: when states are represented as collections of objects and the relationships between them, and the transition function mapping one environment state to the next is expressed in terms of the objects' features, instead of their identities, an entire class of transitions can be represented compactly. Objects sharing the same features can be treated as an abstract class, instead of requiring a transition rule for each individual. A great deal of work has shown that harnessing structure in planning leads to great improvements in efficiency and accuracy (e.g.,~\cite{givan03aij,guestrin03ijcai,kersting04,sanner05uai}). 
+%(e.g.,~\cite{givan03aij,guestrin03ijcai,karabaev05,kersting04,rintanen04icaps,sanner05uai}). 
+
+
+
+%This type of structure lets a transition from one environment state to another environment state be described compactly in terms of how taking a particular action changes the relationships that hold between the various features, or objects, in the environment. %%FIX
+
+%Most artificial planning problems studied today are typically carefully formalized by humans to contain only domain aspects directly relevant to achieving the goal. However, household robots, office assistants, and logistics support systems, for example, will have to solve planning problems ``in the wild.''  Generally speaking, planning in a formal model of the agent's entire natural environment will be intractable; instead, the agent will have to find ways to reformulate a large problem into a more tractable version at run time.
+
+
+
+
+%My past work has focused primarily on reformulating the representation space of what are known as sequential-decision-making problems. These are problems in which an artificial agent must interact with its environment, making decisions one at a time in order to achieve a goal, or set of goals.  As the agent acts, its environment may change in both expected and unexpected ways. 
+%For an intelligent agent to operate efficiently in such environments, it must be able identify and take advantage of the structure of its domain: the space of possible situations and actions is usually too large to work in unless we find some way of identifying what subset of that space is most useful at any given time.
+
+
+
+%% 4. taking the next steps in my work, I'd like to address [various ways of broadening the question, strengthening the representation, etc.]
+
+
+%I am interested in the study of structure in decision-making tasks. 
+%What are the types of representational structure that enable the solution of certain types of problems? When structural information is given, how can this information be used to speed-up problem solution? Can these structures be learned? What is the trade-off between representational accuracy and the accuracy of the behavior that results? 
+
+%I am interested in the study and application of mathematical techniques that let us find and exploit the structure of a decision-making process.
+
+
+Nevertheless, techniques for acquiring such structure automatically by interacting with the environment are not yet well understood. 
+%However, adapting representations of action- and decision-spaces is only one part of the larger endeavor. It does not address the how to acquire knowledge of structure of the underlying process, it assumes that this knowledge already exists, either in the form of probabilistic logical rules or a stochastic transition function. 
+%So far, my work has assumed that the decision-making agent has access to all the information necessary for making a choice. 
+%To complete the picture, it will be necessary to also study 
+For the next steps in my work, I want to address this learning problem,
+%of such complex, stochastic dynamical systems automatically, 
+particularly in environments in which the observations only offer a partial hint about the true state of the system (so-called \emph{partial observability}). This issue arises in the interactions of a variety of agents, for example: the intentions of others are generally not observable, but the real world demands that we collaborate or compete effectively. Progress in this direction will require, in particular, use of powerful Bayesian methods, whose strengths are in combining concisely expressed prior knowledge and with experience acquired on-the-fly~\cite{kemp08pnas,wang06nips,martinez07rss}.
+There is an immediate and broad range of applications for this research, including  massive-scale electronic auctions, search engines and information retrieval, robotics, and clinical trials in drug design and patient treatments.
+
+Working with professors Nando de Freitas and Kevin Leyton-Brown in the Computer Science department at UBC would provide an exceptional chance to tackle these areas. Professor de Freitas's work in mathematical models for large scale prediction and classification specifically addresses  how to make predictions about a world that we only observe in small bits at a time. Professor Leyton-Brown's work on distributed systems of multiple competitive agents addresses the related issue of how artificial agents might model each other when information is limited.  Their complementary expertise would be an invaluable resource in investigating  decision-making systems that behave effectively in a complex, changing world.  
+%It is a basic question that is at the heart of artificial intelligence, operations research, cognitive science and many other areas of scientific inquiry.
+
+
+%% 5. Nando and Kevin are good people to work with because... [what do you know, they have expertise in just the kinds of ways of broadening the question I mentioned in 4, and planted the seeds for in 1 or 2]
+
+
+
+%I want to solve problems of inferring structure from some observations. 
+%So much information out there, can't rely on humans to comb through and make sense of it all. 
+
+\pagebreak
+\bibliography{../../bibtex/nhg}
+\bibliographystyle{plain}
+
+
+
+%\end{letter}
+\end{document}

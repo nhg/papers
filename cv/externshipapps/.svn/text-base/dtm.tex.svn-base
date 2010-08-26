@@ -1,0 +1,46 @@
+
+\documentclass[10pt]{letter}
+
+\oddsidemargin=.2in
+\evensidemargin=.2in
+\textwidth=5.9in
+\topmargin=-.5in
+\textheight=9in
+
+\address{MIT CSAIL \\ 
+32 Vassar St, 32-G585 \\ 
+Cambridge, MA 02139 \\
+{\tt nhg@mit.edu}\\
+(617) 519-3050}
+
+\signature{Natalia Hernandez Gardiol}
+
+\date{\today}
+
+\begin{document}
+
+
+\begin{letter}{Design that Matters \\
+				 1 Broadway, 14th Floor\\
+               Cambridge, MA 02142}   
+                           
+\opening{Dear Sponsor of Externship \#33808:}
+
+I was very excited to see the externship posting for Design that Matters. 
+
+Currently, I am a PhD student at CSAIL (the Computer Science and Artificial Intelligence Lab) and will be  finishing up my dissertation this Fall.  My research is in probabilistic methods for problems of sequential decision-making under uncertainty, and my thesis describes a set of techniques which can be applied to large-scale, logistics-style, planning problems.  During my time at MIT, I've spent a lot of time working on abstract, theoretical problems, and, I think it's time to work on a problem that matters to someone.  I was excited by the chance to put my quantitative background to a different, and potentially immediately useful, end.
+
+On the practical side, my background involves considerable Java hacking. The entire system for my dissertation, over 35,000 lines of code, was written in Java. As a result, it has given me a fair amount of design and testing experience in large software systems.  I am an implementer by trade --- understanding software systems, and using them to good advantage, is my bread and butter.
+
+Other things I'm passionate about, which may be of benefit to Design that Matters, include education; specifically math and science education. For example, this semester, I am helping to teach a course that is a freshman's first look at Electrical Engineering and Computer Science. The course is still relatively new, and, it replaces some of MIT's hallowed, and 30-year old, undergraduate curriculum in EECS. Design issues are always at the forefront of this class, not only in need to design course materials to maximize understanding, but, in the desire to expose students to how a particular design decision can make some parts of a problem easier to solve, and other parts harder.
+
+A further perspective comes from my home country of Uruguay. My parents came as grad students to the United States when I was a young child, and, a constant theme in my life has been how to give back from all I've gained at MIT.  If I've learned anything, it's that if developing countries are to stand on their own, then they must be able to provide a livable environment for their most important resource: their people.
+
+I am very interested in this opportunity at Design that Matters because I believe this organization is taking the right track.  Bringing to fruition high-impact technologies and improving services is not easy. The issues are complex. This would be a great chance to learn about them.
+
+\closing{Sincerely,}
+
+\end{letter}
+
+
+\end{document}

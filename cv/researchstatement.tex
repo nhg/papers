@@ -1,0 +1,69 @@
+\documentclass[12pt]{article}
+\usepackage{my}
+
+\usepackage{graphicx} % standard LaTeX graphics tool
+                      % for including eps-figure files
+
+
+
+\usepackage{fancyvrb}
+\usepackage{url}
+\usepackage{epsf}
+\usepackage{epsfig}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+
+
+%\author{\normalsize{Natalia H. Gardiol}\\
+%\normalsize{nhg@mit.edu} \\
+%\normalsize{MIT Computer Science and Artificial Intelligence Lab}\\
+%\normalsize{Cambridge, MA 02139} \\
+%}
+
+
+%kill the date
+\renewcommand{\today}{\vspace{-.75in}}
+\renewcommand{\topmargin}{.1in}
+\renewcommand{\textheight}{10in}
+\renewcommand{\headheight}{.1in}
+\renewcommand{\headsep}{.1in}
+
+
+\pagestyle{fancy}
+%\lhead{Research Statement} \rhead{August 2005}\chead{{\bf My Name}} \lfoot{} \rfoot{\bf \thepage} \cfoot{}
+
+
+\begin{document}
+  
+\title{{{\large{Natalia H. Gardiol \\ Research Statement}}}}
+
+\maketitle
+
+I am interested in the study of structure in decision-making tasks. What are the types of representational structure that enable the solution of certain types of problems? When structural information is given, how can this information be used to speed-up problem solution? Can these structures be learned? What information is needed?
+%I want to solve problems of inferring structure from some observations. 
+%So much information out there, can't rely on humans to comb through and make sense of it all. 
+The applications of these types of techniques are profound, they range from robot navigation, to automated planning systems, to models of human cognition.  
+I am interested in the study and application of mathematical
+techniques that let us find and exploit the structure of a process.
+
+%\subsection*{Research Background}
+
+
+My past work has focused primarily on reformulating the representation space of
+sequential-decision-making problems. For example, in my thesis
+research, I used classical planning techniques to adapt a
+representation in a probabilistic decision problem. This approach builds on work that casts the problem of solving Markov Decision Processes (MDPs) in an ``anytime'' framework. The main contribution here was moving to a relational representation of the problem and treating predicates in the representation as yet one more element that may be added as the anytime process goes on. This approach, thus, starts out with the simplest possible representation for the purpose of beginning to make decisions quickly, and then, given more time, elaborates on the representation.
+I've also worked
+on studying the ways in which hierarchical representations of action
+structures allows certain reinforcement-learning problems to be solved.
+
+But adapting representations of action- and decision-spaces is only part of the
+issue. It does not address the structure of the underlying process,
+it assumes that already exists. So far, my work has assumed that the decision-making agent has access to all the information necessary for making a choice. 
+To complete the picture, it will be
+necessary to also study how to infer and learn the structure of
+dynamical and static systems when the necessary information is hidden.
+
+
+%\end{letter}
+\end{document}

@@ -1,0 +1,43 @@
+
+\documentclass[10pt]{letter}
+
+\oddsidemargin=.2in
+\evensidemargin=.2in
+\textwidth=5.9in
+\topmargin=-.5in
+\textheight=9in
+
+\address{MIT CSAIL \\ 
+32 Vassar St, 32-G585 \\ 
+Cambridge, MA 02139 \\
+(617) 519-3050}
+
+\signature{Natalia Hernandez Gardiol}
+
+\date{\today}
+
+\begin{document}
+
+
+\begin{letter}{Design That Matters \\
+               Cambridge, MA 02139}   
+                           
+\opening{Dear Sponsor of \#() Externship:}
+
+I was very excited to see the externship ad for Design that Matters. 
+
+I'm a PhD student at CSAIL finishing up my dissertation in sequential decision-making.
+I've spent a lot of time working on abstract, theoretical problems, and, it's time to work on a problem that matters to someone. Financial problems represent that application domain.
+
+My background involves considerable Java hacking. The entire system for my PhD, over 35,000 lines of code, was written in Java. So, I have extensive design and testing experience in large software systems.
+And also education, specifically math and science. 6.01, for which I learned Python, I am teaching ... so design issues are always at the forefront.
+My quantitative background ...
+
+I am also originally from Uruguay. My parents came to the United States as students when I was a young child, and a recurring theme in my life has been how to give back from all I've gained at MIT.  This imbalance can't persist. 
+
+\closing{Sincerely,}
+
+\end{letter}
+
+
+\end{document}

@@ -1,0 +1,20 @@
+
+Dear Pardis,
+
+I hope you are well! 
+
+I was excited to receive this post-doc announcement from your group -- the project sounds very interesting. As maybe you know, I've just finished up my PhD in February, and I'm looking for a post-doc for fall/winter. My thesis was on the problem of sequential decision-making in large state and action spaces, which we applied to logistics-type planning problems. I'll be working this summer for a financial research think-tank  doing large-scale financial/economic modeling of emerging markets. It'll be quite a change of pace and I'm pretty excited about it.
+
+Over the past few months I've been reflecting a remark a friend made to me a while back about the value of problem-driven research, and the more I think about it, the more I realize I that that is absolutely the direction I want to move in. I see lots of open problems in the modeling of economic, financial, and environmental data, which has become compelling to me as I think about information needs back home in Uruguay.  The research firm I'm working for this summer (State Street Research, here in Cambridge) sees an enormous amount of data daily -- something like 15% of daily world trade voIume. I think your project on the analysis of genetic data for natural selection, in addition to being hugely compelling work, is also highly relevant because of the specific technical demands of large data sets.
+
+I don't have specific background in computation biology, so I would have to learn. I would also be more than happy to do background reading over the summer in preparation, if that would be helpful. As far as programming languages, my thesis research was in Java, I've programmed extensively in C/C++, and I've programmed in Matlab and Python often in other projects. I'll probably be working in Matlab and R quite a bit this summer.
+
+My cv can be found here: http://www.csail.mit.edu/~nhg/nhg_cv.pdf. I'm not sure what kind of a time frame you were looking at; it's possible that September may be too late to start. But I am sure you will get a lot of strong applications! Please keep me posted if there is any more information I can provide.
+  
+
+Sincerely,
+
+-natalia
+
+p.s. As a side note, my roommate, who is a first-year at HMS, brought home a copy of the alumni newsletter (I think it was) a few weeks ago. Flipping through it, there you were! It was super fun to read about all your exploits. It was also fun to point out I know a rock star :)  In all seriousness, congratulations. You are making a lot of cool things happen.
+

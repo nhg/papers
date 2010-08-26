@@ -1,0 +1,286 @@
+% cv-us.tex
+% $Id: cv-us.tex,v 1.28 2006/12/12 22:53:52 jrblevin Exp $
+%
+% LaTeX Curriculum Vitae Template
+%
+% Copyright (C) 2004-2006 Jason Blevins
+%
+% You may use use this document as a template to create your own CV
+% and you may redistribute the source code freely. No attribution is
+% required in any resulting documents, however, I do ask that you
+% please leave this notice and the above URL in the source code if you
+% choose to redistribute this file.
+%
+% Jason R. Blevins <jrblevin@sdf.lonestar.org>
+% http://jrblevin.freeshell.org
+% Durham, December 12, 2006
+%
+%%---------------------------------------------------------------------------%
+%
+% Notes:
+%
+% * Don't forget to change `pdfauthor' and `keywords' in the \hypersetup
+%   section below.
+%
+% * To create a new page use: \newpage \opening
+%
+% * res.cls includes an \address{} command which can be used up to twice,
+%   but my address is too long for the format it uses.
+%
+% * Alternate documentclass statement to put headings in margin:
+%   \documentclass[margin,line,11pt,final]{res}
+%
+% * Can divide publication/presentation list into subsections by year:
+%   \section{\bf\small\hspace{8mm}2006}
+%
+%%----------------------------------------------------------------------------%
+
+\documentclass[overlapped,line,letterpaper]{res}
+
+\usepackage{ifpdf}
+\usepackage{bibunits}
+
+\ifpdf
+  \usepackage[pdftex]{hyperref}
+\else
+  \usepackage[hypertex]{hyperref}
+\fi
+
+\hypersetup{
+  letterpaper,
+  colorlinks,
+  urlcolor=black,
+  pdfpagemode=none,
+  pdftitle={Curriculum Vitae},
+  pdfauthor={Natalia Hernandez Gardiol},
+  pdfcreator={$ $Id: cv-nhg.tex,v 1.28 2007/12/12 22:53:52 nhg Exp $ $},
+  pdfsubject={Curriculum Vitae},
+  pdfkeywords={}
+}
+
+
+%---------------------------------------------------------------------------
+
+%remove bibtex citation labels
+\makeatletter
+\renewcommand\@biblabel[1]{\hspace{-.06in}}
+\makeatother
+
+%remove bibliography heading title
+\renewcommand\refname{\vspace{-.1in}}
+
+
+
+\makeatletter
+\def\section{\@ifnextchar*\@@section@star\@@section}
+\def\@@section@star*{\@@section}
+\makeatother
+
+
+
+%%===========================================================================%%
+
+\begin{document}
+
+
+%---------------------------------------------------------------------------
+% Document Specific Customizations
+
+% Make lists without bullets and with no indentation
+\setlength{\leftmargini}{0em}
+\renewcommand{\labelitemi}{}
+
+% Use large bold font for printed name at top of pages
+\renewcommand{\namefont}{\large\textbf}
+\renewcommand{\sectionfont}{\bf\large}
+
+
+%---------------------------------------------------------------------------
+
+\name{Natalia Hernandez Gardiol}
+
+\begin{resume}
+
+\begin{ncolumn}{2}
+  MIT CSAIL      			& Phone: (617) 519-3050 \\
+  32 Vassar St, 32-G585	& {\tt nhg@csail.mit.edu} \\
+  Cambridge, MA 02139		& {\tt \verb+http://csail.mit.edu/~nhg+} \\
+\end{ncolumn}
+
+%---------------------------------------------------------------------------
+
+\section{Academic Background}
+\begin{description}
+\item [Doctor of Philosophy] in Electrical Engineering and Computer Science \dotfill December 2007\\
+Massachusetts Institute of Technology, Cambridge, MA\\
+%Advisor: Leslie Pack Kaelbling \\
+%Committee: Leslie Kaelbling, Tomas Lozano-Perez, Hector Geffner (Universitat Pompeu Fabra), Tom Dean (Brown University and Google) \\
+Thesis title: Relational Envelope-based Planning
+
+
+\item [Master of Science] in Electrical Engineering and Computer Science \dotfill February 2003\\
+Massachusetts Institute of Technology, Cambridge, MA \\
+%Advisor: Leslie Pack Kaelbling\\
+Thesis title: Applying Probabilistic Rules to Relational Worlds
+
+\item [Bachelor of Science] in Computer Science and Engineering, {\it with high honors} \dotfill December 1999\\
+Michigan State University, East Lansing, MI\\
+%Advisor: Sridhar Mahadevan
+\end{description}
+
+\section{Research Interests} 
+Decision-making under uncertainty, Probabilistic
+models, Reinforcement learning, Planning. 
+
+%---------------------------------------------------------------------------
+\section{Professional Experience}
+
+\begin{description}
+\item [Visiting Professor/Postdoctoral Associate] \dotfill March 2010 - July 2010 \\
+Universitat Pompeu Fabra, Barcelona, Spain \\
+Artificial Intelligence Group, directed by Hector Geffner\\
+Teaching Responsibilities: Automata Theory and Introduction to Databases 
+\item [Assistant Vice President] \dotfill May 2008 - February 2010 \\
+State Street Associates, Cambridge, MA \\
+Research Topics: statistical models of trading data, financial indicator development and production
+\item [Postdoctoral Associate] \dotfill January 2008 - May 2008 \\
+Massachusetts Institute of Technology \\
+LIS Lab, directed by Leslie Pack Kaelbling and Tomas Lozano-Perez \\
+Research Topics: Bayesian models, statistical learning methods
+\item [Research Assistant] \dotfill September 2000 - December 2007\\
+Massachusetts Institute of Technology\\
+LIS Lab, directed by Leslie Pack Kaelbling  \\
+%Advisor: Leslie Pack Kaelbling.
+Research Topics: probabilistic models for sequential decision-making, planning with abstractions, reinforcement learning with partial observability
+\item [Research Assistant] \dotfill September 1998 - June 2000\\
+Michigan State University\\
+Autonomous Agents Lab, directed by Sridhar Mahadevan\\
+%Advisor: Sridhar Mahadevan.
+Research topics: hierarchical reinforcement learning
+\item [Engineering Co-operative Education Internship] \dotfill  January 1998 - August 1998\\
+IBM Global Services, Southbury Connecticut. \\
+Advisor: Linda Yue.\\
+Projects: Lotus Notes application programming, Perl scripts to assist DNS management 
+\item [Undergraduate Research Assistant] \dotfill May 1997 - December 1997 \\
+Michigan State University\\
+Pattern Recognition and Image Processing Lab, directed by Anil Jain \\
+%Advisor: Anil Jain. 
+Research topics: automated finger-print image capture
+\item [Undergraduate Research Assistant] \dotfill September 1996 - May 1997\\
+Michigan State University\\
+Genetic Algorithms Lab, directed by Bill Punch\\
+ %Advisor: Bill Punch. 
+ Project: search interface for multiple web search engines
+\end{description}
+
+
+
+%---------------------------------------------------------------------------
+\section{Teaching Experience}
+
+
+\begin{description}
+\item [Lecturer] \dotfill Spring 2010 \\
+Universitat Pompeu Fabra, Barcelona, Spain\\
+Second-year, core requirement: Automata Theory and Formal Languages (Theory of Computation)\\
+Planned theory lectures; helped design homework assignments, recitation problems, and final exam.
+\item [Lab Instructor] \dotfill Spring 2010 \\
+Universitat Pompeu Fabra, Barcelona, Spain\\
+First-year, core requirement: Introduction to Databases\\
+Designed completely new laboratory sessions to introduce students to the design and implementation of databases for web-applications.
+\item [Teaching Assistant] \dotfill  Fall 2007\\
+Massachusetts Institute of Technology\\
+Undergraduate-level, core requirement: 6.01, Introduction to EECS.\\
+Assisted with problem set development, offered office hours and classroom support for students on projects ranging from Python coding, to simple circuits and basic robot control.
+
+%Instructors: Tomas Lozano-Perez, Jacob White, Seth Teller.
+
+\item [Teaching Assistant] \dotfill  Fall 2002\\
+Massachusetts Institute of Technology\\
+Graduate-level, core elective: 6.827, Techniques in Artificial Intelligence.\\
+Helped prepare problem sets, offered office hours and review sessions.
+%Instructor: Leslie Pack Kaelbling
+
+
+\end{description}
+
+
+
+
+%---------------------------------------------------------------------------
+\section{Papers}
+\vspace{-.07in}
+
+
+%\subsection{Theses} 
+
+%\vspace{-.4in}\begin{bibunit}[myresume]
+% \nocite{gardiolphd,gardiolms}\putbib[../bibtex/nhg]
+% \end{bibunit}
+
+
+\subsection{Conferences and Symposia} 
+
+
+\vspace{-.4in}\begin{bibunit}[myresume]
+    \nocite{gardiol07,gardiol06,gardiol03nips,finney02,kaelbling01,gardiol00nips} 
+    \putbib[../bibtex/nhg] \end{bibunit}
+     
+\subsection{Technical Reports} 
+
+\vspace{-.4in} \begin{bibunit}[myresume]
+ \nocite{gardiol08tr, gardiolphd, nhg06tr, gardiolms, deictic02}\putbib[../bibtex/nhg]
+ \end{bibunit}
+
+
+
+%---------------------------------------------------------------------------
+
+
+\section{Awards \& Fellowships}
+\begin{description}
+  \item     [GE Fund Faculty for the Future Fellowship] Spring 2004
+  \item     [National Science Foundation Graduate Research Fellowship] 3-Year Fellowship, Fall 2000
+\item  [Outstanding Undergraduate Research Award] Computing Research Association. Dec. 1999
+\item  [Professorial Assistantship] Michigan State University. 2-Year Grant, Spring 1995
+\item  [Spartan Scholarship] Michigan State University. 4-Year Scholarship, Spring 1995
+\end{description}
+
+
+%---------------------------------------------------------------------------
+\section{Professional Activities}
+
+\begin{description}
+\item [Journal Reviewing] 
+Journal of Artificial Intelligence Research
+\item [Conference Reviewing]
+Neural Information
+Processing Systems conference (NIPS) 2003, 2004; International Joint
+Conference on Artificial Intelligence (IJCAI) 2003, 2005, 2009; Robotics Science \&
+Systems (RSS) 2005; New England Student Conference on Artificial Intelligence (NESCAI) 2007; Iberamia-08; International Conference on Machine Learning (ICML) 2007, 2008; European Conference on Artificial Intelligence (ECAI) 2010.
+\item [Society Memberships]
+Tau Beta Pi, American Association for Artificial Intelligence (AAAI)
+\end{description}
+
+\section{Languages}
+\begin{description}
+\item Spanish (native), English (native), French (fluent)
+\end{description}
+
+%---------------------------------------------------------------------------
+\section{Other Interests}
+
+\begin{description}
+\item [Cambridge Bicycle/Igleheart Frames Cycling Team] Dedicated grassroots amateur cycling team competing in Road, Mountain, and Cyclocross disciplines, 2008-2010. Led skills workshops on introduction to bicycle racing as Women's team captain.
+\item [MIT Cycling Team] Competed in  Road, Mountain, Track, and Cyclocross disciplines, 2005 - 2007. Member of Collegiate National Cyclocross Championship team, 2006. 
+\item [MIT Outing Club] Led official Winter skiing, snowshoeing trips and Summer rock-climbing trips. Board of directors member and Skiing chair, 2003-2006.
+\item [Wilderness First Aid] WFA and Advanced WFA certified, 2003 and 2005.
+\end{description}
+
+\end{resume}
+
+
+%\bibliographystyle{myresume}
+%\bibliography{../bibtex/nhg}
+\end{document}
+

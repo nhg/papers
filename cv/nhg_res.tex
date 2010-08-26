@@ -1,0 +1,137 @@
+\documentclass{modresume}
+\usepackage{bibunits}
+
+\renewcommand{\categoryfont}{\sc}%for miklos-based resume.cls
+
+%
+% set the space used for category titles here:
+% use the same value for oddsidemargin and marginparwidth [the latter 
+%               will be reset to account for marginparsep]
+% 
+%\setlength{\oddsidemargin}{1in}
+%\setlength{\marginparwidth}{1in}
+% 
+% calculate other dimensions [textwidth and evensidemargin] 
+% in function of oddsidemargin and marginparwidth: 
+% would be nicer to put in the class file...
+%
+\addtolength{\marginparwidth}{-\marginparsep}
+ \setlength{\evensidemargin}{\oddsidemargin}
+ \setlength{\textwidth}{\paperwidth}
+ \addtolength{\textwidth}{-2in}
+ \addtolength{\textwidth}{-2\oddsidemargin}
+ \addtolength{\textwidth}{\marginparwidth}
+ \addtolength{\textwidth}{\marginparsep}
+%
+%
+\setlength{\topmargin}{-0.5in}
+%
+%
+\renewcommand{\labelcitem}{$\diamond$}
+\renewcommand{\labelitemi}{$\cdot$}
+\newcommand{\first}{$1^{\mbox{\scriptsize st}}$\ }
+\newcommand{\second}{$2^{\mbox{\scriptsize nd}}$\ }
+\newcommand{\third}{$3^{\mbox{\scriptsize rd}}$\ }
+
+%remove bibtex citation labels
+\makeatletter
+\renewcommand\@biblabel[1]{\hspace{-.06in}}
+\makeatother
+%remove bibliography heading title
+\renewcommand\refname{\vspace{-.55in}}
+
+\author{Natalia Hern\'andez Gardiol}
+
+
+% ------ Address --------------------------------------------------------
+
+\address{MIT CSAIL\\
+  32 Vassar St, 32-G585\\
+  Cambridge, MA 02139}{
+        \mbox{\small\tt nhg@mit.edu}\\
+   \mbox{\small\tt http://csail.mit.edu/\~\ nhg}\\
+        (617) 258-9749}
+
+\begin{document}
+\maketitle
+
+% ------- Education ---------------------------------------------------
+
+\begin{category}{Academic Background}
+\citem{Massachusetts Institute of Technology}, Cambridge, MA.\\
+Ph.D. in Electrical Engineering and Computer Science, expected 2006.\\
+M.Sc. in Electrical Engineering and Computer Science, February 2003.\\
+Master's thesis: {\em Applying Probabilistic Rules To Relational  Worlds}
+\citem{Michigan State University}, East Lansing, MI.\\
+B.Sc. in Computer Science and Engineering, December 1999.
+\end{category}
+
+\begin{category}{Honors \& Awards}
+  \citemnobullet     GE Fund Faculty for the Future Fellowship, Spring 2004.
+  \citemnobullet        National Science Foundation Graduate Research Fellowship. 3-Year Fellowship, Fall 2000.
+\citemnobullet  Outstanding Undergraduate Research Award, Computing Research Association. Winner, December 1999.
+\citemnobullet  Professorial Assistantship, Michigan State University. 2-Year Grant, Spring 1995
+\citemnobullet  Spartan Scholarship, Michigan State University. 4-Year Scholarship, Spring 1995
+\end{category}
+
+% --------- Research ----------------------------------------------------
+
+\begin{category}{Research interests}
+\citemnobullet Reinforcement learning, Planning, Probabilistic logical
+models, Decision-making under uncertainty.
+\end{category}
+
+
+% -------- Papers --------------------------------------------
+%%% is there a way to pull this from a bibtex file?????????????
+\begin{category}{Papers}
+  \citem{Refereed Conferences}\begin{bibunit}[myresume]
+    \nocite{gardiol07,gardiol06,nhg06tr,gardiol03nips,finney02,gardiol00nips} \putbib[../bibtex/nhg] \end{bibunit}
+\citem{Master's Thesis}\begin{bibunit}[myresume]
+ \nocite{gardiolms}\putbib[../bibtex/nhg]\end{bibunit}
+\citem{Technical Reports}\begin{bibunit}[myresume]
+ \nocite{deictic02,kaelbling01}\putbib[../bibtex/nhg]\end{bibunit}
+  
+\end{category}
+
+% --------  experience --------------------------------------------
+
+\begin{category}{Research  Experience}
+\citem Research Assistant (September 2000 - present)
+Massachusetts Institute of Technology, AI Lab. Advisor: Leslie Pack Kaelbling.
+\citem Research Assistant (September 1998 - June 2000)
+
+Michigan State University, CSE Dept, Autonomous Agents Lab.  Advisor: Sridhar Mahadevan.
+\citem Undergraduate Researcher (May 1997 - December 1997) 
+Michigan State University, CSE Dept, Pattern Recognition and Image Processing Lab.  Advisor: Anil Jain. 
+\citem Undergraduate Researcher (September 1996 - May 1997) 
+Michigan State University, CSE Dept, GARAGe Lab.  Advisor: Bill Punch. 
+\end{category}
+
+\begin{category}{Industrial Experience}
+\citem Engineering Co-operative Education Internship  (January 1998 - August 1998)
+IBM Global Services, Southbury Connecticut. Advisor: Linda Yue.
+\end{category}
+
+\begin{category}{Teaching Experience}
+\citem  Teaching Assistant (September 2002 - December 2002)
+Massachusetts Institute of Technology, Course: Graduate-level introduction to Artificial Intelligence techniques.
+\end{category}
+
+\begin{category}{Profess. Activities}
+\citem Journal Reviewing \\
+Journal of Artificial Intelligence Research
+\citem Conference Reviewing\\
+Neural Information
+Processing Systems conference (NIPS) 2003, 2004; International Joint
+Conference on Artificial Intelligence (IJCAI) 2003, 2005; Robotics Science \&
+Systems, 2005.
+\citem Society Memberships\\
+Tau Beta Pi, American Association for Artificial Intelligence (AAAI).
+ \end{category}
+
+
+% -------- Reference --------------------------------------------
+
+
+\end{document}

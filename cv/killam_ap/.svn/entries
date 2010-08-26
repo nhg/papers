@@ -1,0 +1,52 @@
+8
+
+dir
+690
+svn+ssh://svn.csail.mit.edu/afs/csail/group/lis/REPOS/rebp/papers/cv/killam_ap
+svn+ssh://svn.csail.mit.edu/afs/csail/group/lis/REPOS/rebp
+
+
+
+2008-10-31T13:49:40.866063Z
+690
+nhg
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+d356b4f6-b100-0410-a209-e3f56111b895
+
+researchstatement.tex
+file
+
+
+
+
+2009-01-06T05:17:02.000000Z
+75000683e395d4e7503d27bbf383f93d
+2008-10-31T13:49:40.866063Z
+690
+nhg
+
+simplemargins.sty
+file
+
+
+
+
+2009-01-06T05:17:02.000000Z
+f7fb4d241bbfe4a961dbe15a61523b8a
+2008-10-24T23:27:20.387295Z
+686
+nhg
+

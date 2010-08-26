@@ -1,0 +1,45 @@
+This is BibTeX, Version 0.99c (TeX Live 2009)
+The top-level auxiliary file: bu2.aux
+The style file: myresume.bst
+Database file #1: ../bibtex/nhg.bib
+You've used 5 entries,
+            2241 wiz_defined-function locations,
+            548 strings with 5070 characters,
+and the built_in function-call counts, 1289 in all, are:
+= -- 80
+> -- 38
+< -- 3
++ -- 15
+- -- 10
+* -- 56
+:= -- 166
+add.period$ -- 16
+call.type$ -- 5
+change.case$ -- 4
+chr.to.int$ -- 0
+cite$ -- 5
+duplicate$ -- 154
+empty$ -- 116
+format.name$ -- 13
+if$ -- 264
+int.to.chr$ -- 0
+int.to.str$ -- 5
+missing$ -- 42
+newline$ -- 33
+num.names$ -- 5
+pop$ -- 64
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 12
+stack$ -- 0
+substring$ -- 2
+swap$ -- 98
+text.length$ -- 3
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 0
+while$ -- 5
+width$ -- 6
+write$ -- 68

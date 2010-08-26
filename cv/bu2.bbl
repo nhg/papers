@@ -1,0 +1,37 @@
+\begin{thebibliography}{1}
+\newcommand{\enquote}[1]{``#1''}
+\expandafter\ifx\csname url\endcsname\relax
+  \def\url#1{{\tt #1}}\fi
+\expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
+
+\bibitem{gardiol08tr}
+Natalia~H. Gardiol and Leslie~Pack Kaelbling.
+\newblock \enquote{Adaptive envelope {MDP}s for relational equivalence-based
+  planning}.
+\newblock Technical Report MIT-CSAIL-TR-2008-050, MIT CSAIL, Cambridge, MA,
+  2008.
+
+\bibitem{gardiolphd}
+Natalia~H. Gardiol.
+\newblock {\em Relational Envelope-based Planning\/}.
+\newblock Ph.D. thesis, MIT, Cambridge, MA, 2007.
+\newblock MIT-CSAIL-TR-2007-061.
+
+\bibitem{nhg06tr}
+N.~H. Gardiol and L.~P. Kaelbling.
+\newblock \enquote{Computing action equivalences for planning under time
+  constraints}.
+\newblock Technical Report MIT-CSAIL-TR-2006-022, MIT CS \& AI Lab, Cambridge,
+  MA, 2006.
+
+\bibitem{gardiolms}
+Natalia~H. Gardiol.
+\newblock {\em Applying Probabilistic Rules To Relational Worlds\/}.
+\newblock Master's thesis, MIT, Cambridge, MA, 2002.
+
+\bibitem{deictic02}
+Sarah~J. Finney, Natalia~H. Gardiol, Leslie~Pack Kaelbling, and Tim Oates.
+\newblock \enquote{Learning with deictic representations}.
+\newblock Technical Report AIM-2002-006, MIT AI Lab, Cambridge, MA, 2002.
+
+\end{thebibliography}

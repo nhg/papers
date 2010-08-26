@@ -1,0 +1,45 @@
+
+\documentclass[10pt]{letter}
+
+\oddsidemargin=.2in
+\evensidemargin=.2in
+\textwidth=5.9in
+\topmargin=-.5in
+\textheight=9in
+
+\address{MIT CSAIL \\ 
+32 Vassar St, 32-G585 \\ 
+Cambridge, MA 02139 \\
+{\tt nhg@mit.edu}\\
+(617) 519-3050}
+
+\signature{Natalia Hernandez Gardiol}
+
+\date{\today}
+
+\begin{document}
+
+
+\begin{letter}{Credit Suisse \\
+				 1 Cabot Square\\
+               London, AE 11111}   
+                           
+\opening{Dear Sponsor of Externship \#32843:}
+
+
+I was very intrigued by reading the externship posting by Credit Suisse. 
+
+Currently, I am a PhD student at CSAIL (the Computer Science and Artificial Intelligence Lab) and will be  finishing up my dissertation this Fall.  My research is in probabilistic methods for problems of sequential decision-making under uncertainty, and my thesis describes a set of techniques which can be applied to large-scale, logistics-style, planning problems.  During my time at MIT, I've spent a lot of time working on abstract, theoretical problems, and, I think it's time to work on a problem that matters to someone.  I was excited by the chance to put my quantitative background to a different, challenging, and potentially immediately useful, end.
+
+As I am finishing up my research at MIT, I'm finding it important to take a step back and try to find the big picture. A necessary part of that picture is identifying outlets for the mathematical techniques I've had a chance to both develop and be exposed to here. While the fields of economics and finance are new to me, they are hugely important to understanding how the world works. The specific mathematical approach will be new, but, the same rigor applies.
+
+I am very interested in this opportunity at Credit Suisse because it opens up a fresh world of potential applications. The issues in financial analysis are complex. This would be an extraordinary chance to learn about them.
+
+                          
+
+\closing{Sincerely,}
+
+\end{letter}
+
+
+\end{document}

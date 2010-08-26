@@ -1,0 +1,54 @@
+\begin{thebibliography}{1}
+\newcommand{\enquote}[1]{``#1''}
+\expandafter\ifx\csname url\endcsname\relax
+  \def\url#1{{\tt #1}}\fi
+\expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
+
+\bibitem{gardiol07}
+Natalia~H. Gardiol and Leslie~Pack Kaelbling.
+\newblock \enquote{Action-space partitioning for planning}.
+\newblock In {\em National Conference on Artificial Intelligence (AAAI)\/}.
+  Vancouver, Canada, 2007.
+\newblock {\bf Note: One of top five international conferences for AI/Machine
+  Learning; the others are NIPS, UAI, ICML, and IJCAI. Acceptance rate in 2007:
+  27.5\% (253/921) }.
+
+\bibitem{gardiol06}
+N.~H. Gardiol and L.~. Kaelbling.
+\newblock \enquote{Computing action equivalences for planning}.
+\newblock In {\em International Conference on Automated Planning and
+  Scheduling, Doctoral Consortium\/}. Cumbria, UK, 2006.
+\newblock {\bf Note: Leading international conference for planning research.}
+
+\bibitem{gardiol03nips}
+Natalia~H. Gardiol and Leslie~P. Kaelbling.
+\newblock \enquote{Envelope-based planning in relational {MDP}s}.
+\newblock In {\em Advances in Neural Information Processing 16 (NIPS-2003)\/}.
+  Vancouver, 2004.
+\newblock {\bf Note: Top five international conference for AI/ML. Acceptance
+  rate in 2003: 27.6\% (198/717) }.
+
+\bibitem{finney02}
+Sarah~J. Finney, Natalia~H. Gardiol, Leslie~Pack Kaelbling, and Tim Oates.
+\newblock \enquote{The thing that we tried didn't work very well: Deictic
+  representation in reinforcement learning}.
+\newblock In {\em 18th Int'l Conference on Uncertainty in Artificial
+  Intelligence (UAI-02)\/}. Edmonton, 2002.
+\newblock {\bf Note: Top five international conference for AI/ML. Acceptance
+  rate in 2002: 34\% (66/192) }.
+
+\bibitem{kaelbling01}
+Leslie~Pack Kaelbling, Tim Oates, Natalia~H. Gardiol, and Sarah~J. Finney.
+\newblock \enquote{Learning in worlds with objects}.
+\newblock In {\em Working Notes of the AAAI Stanford Spring Symposium on
+  Learning Grounded Representations\/}. March 2001.
+
+\bibitem{gardiol00nips}
+Natalia~H. Gardiol and Sridhar Mahadevan.
+\newblock \enquote{Hierarchical memory-based reinforcement learning}.
+\newblock In {\em Advances in Neural Information Processing 13 (NIPS-2000)\/}.
+  Denver, 2001.
+\newblock {\bf Note: Top five international conference for AI/ML. Acceptance
+  rate in 2001: 30\% }.
+
+\end{thebibliography}
