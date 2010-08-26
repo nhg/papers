@@ -1,0 +1,48 @@
+This is BibTeX, Version 0.99c (Web2C 7.5.7)
+The top-level auxiliary file: jair.aux
+The style file: theapa.bst
+Database file #1: ../bibtex/nhg.bib
+You can't pop an empty literal stack for entry givan00boundedaij
+while executing---line 1434 of file theapa.bst
+You've used 30 entries,
+            2804 wiz_defined-function locations,
+            773 strings with 8914 characters,
+and the built_in function-call counts, 10857 in all, are:
+= -- 909
+> -- 595
+< -- 25
++ -- 188
+- -- 183
+* -- 1014
+:= -- 1874
+add.period$ -- 66
+call.type$ -- 30
+change.case$ -- 176
+chr.to.int$ -- 30
+cite$ -- 30
+duplicate$ -- 469
+empty$ -- 821
+format.name$ -- 235
+if$ -- 2104
+int.to.chr$ -- 0
+int.to.str$ -- 0
+missing$ -- 28
+newline$ -- 154
+num.names$ -- 126
+pop$ -- 215
+preamble$ -- 1
+purify$ -- 208
+quote$ -- 0
+skip$ -- 297
+stack$ -- 0
+substring$ -- 257
+swap$ -- 103
+text.length$ -- 3
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 236
+warning$ -- 0
+while$ -- 95
+width$ -- 0
+write$ -- 385
+(There was 1 error message)

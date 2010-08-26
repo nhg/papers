@@ -1,0 +1,32 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1038\cocoasubrtf250
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\margl1440\margr1440\vieww9000\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural\pardirnatural
+
+\f0\b\fs24 \cf0 FFReplan
+\b0 \
+1. MDPSim:\
+	a) cd rebp/other_planners/mdpsim-2.2.2/\
+	b) ./mdpsim --port=2323 --time-limit=10000 ../FF_Replan/bw-c-pc-8.pddl\
+\
+2. FF-replan: \
+	a) ./ffreplan -alloutcome-replan bw-c-pc-8.pddl\
+	a) ./ffreplan -alloutcome-replan bw-c-pc-8.pddl -hname 128.30.112.60  //for sep-1\
+\
+-hname ipaddress -iport portnumber, to set ipaddress and portnumber if they are not localhost and 2323\
+\
+\
+\
+
+\b GPT
+\b0 \
+cd ~/rebp/other_planners/gpt-2.00-src\
+make -f Makefile.linux clean\
+make -f Makefile.linux compile\
+\
+MDPSim:\
+http://www.tempastic.org/mdpsim/\
+\
+Blai Bonet homepage: \
+http://www.ldc.usb.ve/~bonet/#software}

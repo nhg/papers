@@ -1,0 +1,384 @@
+This is pdfTeXk, Version 3.1415926-1.40.9 (Web2C 7.5.7) (format=pdflatex 2008.12.28)  16 FEB 2009 12:32
+entering extended mode
+\write18 enabled.
+ %&-line parsing enabled.
+**jair.tex
+(./jair.tex
+LaTeX2e <2005/12/01>
+Babel <v3.8l> and hyphenation patterns for english, usenglishmax, dumylang, noh
+yphenation, german-x-2008-06-18, ngerman-x-2008-06-18, ancientgreek, ibycus, ar
+abic, basque, bulgarian, catalan, pinyin, coptic, croatian, czech, danish, dutc
+h, esperanto, estonian, farsi, finnish, french, galician, german, ngerman, mono
+greek, greek, hungarian, icelandic, indonesian, interlingua, irish, italian, la
+tin, lithuanian, mongolian, mongolian2a, bokmal, nynorsk, polish, portuguese, r
+omanian, russian, sanskrit, serbian, slovak, slovenian, spanish, swedish, turki
+sh, ukenglish, ukrainian, uppersorbian, welsh, loaded.
+(/usr/local/texlive/2008/texmf-dist/tex/latex/base/latex209.def
+File: latex209.def 1998/05/13 v0.52 Standard LaTeX file
+
+
+          Entering LaTeX 2.09 COMPATIBILITY MODE
+ *************************************************************
+    !!WARNING!!    !!WARNING!!    !!WARNING!!    !!WARNING!!   
+ 
+ This mode attempts to provide an emulation of the LaTeX 2.09
+ author environment so that OLD documents can be successfully
+ processed. It should NOT be used for NEW documents!
+ 
+ New documents should use Standard LaTeX conventions and start
+ with the \documentclass command.
+ 
+ Compatibility mode is UNLIKELY TO WORK with LaTeX 2.09 style
+ files that change any internal macros, especially not with
+ those that change the FONT SELECTION or OUTPUT ROUTINES.
+ 
+ Therefore such style files MUST BE UPDATED to use
+          Current Standard LaTeX: LaTeX2e.
+ If you suspect that you may be using such a style file, which
+ is probably very, very old by now, then you should attempt to
+ get it updated by sending a copy of this error message to the
+ author of that file.
+ *************************************************************
+
+\footheight=\dimen102
+\@maxsep=\dimen103
+\@dblmaxsep=\dimen104
+\@cla=\count79
+\@clb=\count80
+\mscount=\count81
+(/usr/local/texlive/2008/texmf-dist/tex/latex/base/tracefnt.sty
+Package: tracefnt 1997/05/29 v3.0j Standard LaTeX package (font tracing)
+\tracingfonts=\count82
+LaTeX Info: Redefining \selectfont on input line 101.
+)
+\symbold=\mathgroup4
+\symsans=\mathgroup5
+\symtypewriter=\mathgroup6
+\symitalic=\mathgroup7
+\symsmallcaps=\mathgroup8
+\symslanted=\mathgroup9
+LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 293.
+LaTeX Font Info:    Redeclaring math alphabet \mathsf on input line 294.
+LaTeX Font Info:    Redeclaring math alphabet \mathtt on input line 295.
+LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 301.
+LaTeX Info: Redefining \em on input line 311.
+
+(/usr/local/texlive/2008/texmf-dist/tex/latex/base/latexsym.sty
+Package: latexsym 1998/08/17 v2.2e Standard LaTeX package (lasy symbols)
+\symlasy=\mathgroup10
+LaTeX Font Info:    Overwriting symbol font `lasy' in version `bold'
+(Font)                  U/lasy/m/n --> U/lasy/b/n on input line 47.
+)
+LaTeX Font Info:    Redeclaring math delimiter \lgroup on input line 375.
+LaTeX Font Info:    Redeclaring math delimiter \rgroup on input line 377.
+LaTeX Font Info:    Redeclaring math delimiter \bracevert on input line 379.
+)
+(/usr/local/texlive/2008/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2005/09/16 v1.4f Standard LaTeX document class
+(/usr/local/texlive/2008/texmf-dist/tex/latex/base/size11.clo
+File: size11.clo 2005/09/16 v1.4f Standard LaTeX file (size option)
+)
+\c@part=\count83
+\c@section=\count84
+\c@subsection=\count85
+\c@subsubsection=\count86
+\c@paragraph=\count87
+\c@subparagraph=\count88
+\c@figure=\count89
+\c@table=\count90
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+Compatibility mode: definition of \rm ignored.
+Compatibility mode: definition of \sf ignored.
+Compatibility mode: definition of \tt ignored.
+Compatibility mode: definition of \bf ignored.
+Compatibility mode: definition of \it ignored.
+Compatibility mode: definition of \sl ignored.
+Compatibility mode: definition of \sc ignored.
+LaTeX Info: Redefining \cal on input line 506.
+LaTeX Info: Redefining \mit on input line 507.
+\bibindent=\dimen105
+) (./jair.sty
+Document Style `jair' -- May 1993.
+\aftertitskip=\skip43
+\beforetitskip=\skip44
+\interauthorskip=\skip45
+\aftermaketitskip=\skip46
+) (./algorithm.sty
+
+Document style option `algorithm' Release 2.5 -- March 13 1995 --
+
+\c@AlgoLine=\count91
+\skiptotal=\skip47
+\skiprule=\skip48
+\skiptext=\skip49
+\skiplength=\skip50
+\marge=\skip51
+\skipnumline=\skip52
+\algowidth=\dimen106
+\inoutsize=\dimen107
+\c@floatalgo=\count92
+) (./theapa.sty
+APA Citation (& Optional APA Heading) Style - Version 2.5.1 (5/92)
+\bibleftmargin=\skip53
+\b@level@one@skip=\skip54
+\e@level@one@skip=\skip55
+\b@level@two@skip=\skip56
+\e@level@two@skip=\skip57
+\b@level@three@skip=\skip58
+\e@level@three@skip=\skip59
+\b@level@four@skip=\skip60
+\e@level@four@skip=\skip61
+\b@level@five@skip=\skip62
+\e@level@five@skip=\skip63
+\c@APAenum=\count93
+\@text@par@indent=\skip64
+\UL@hyphenbox=\box26
+\UL@box=\box27
+\UL@spfactor=\count94
+\UL@penalty=\count95
+\UL@skip=\skip65
+\UL@lht=\dimen108
+\UL@ldp=\dimen109
+\UL@pixel=\dimen110
+) (/usr/local/texlive/2008/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/local/texlive/2008/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
+\KV@toks@=\toks14
+)
+(/usr/local/texlive/2008/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2006/02/20 v1.0o Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/local/texlive/2008/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+)
+(/usr/local/texlive/2008/texmf/tex/latex/config/graphics.cfg
+File: graphics.cfg 2007/01/18 v1.5 graphics configuration of teTeX/TeXLive
+)
+Package graphics Info: Driver file: pdftex.def on input line 90.
+
+(/usr/local/texlive/2008/texmf-dist/tex/latex/pdftex-def/pdftex.def
+File: pdftex.def 2008/09/08 v0.04l Graphics/color for pdfTeX
+\Gread@gobject=\count96
+))
+\Gin@req@height=\dimen111
+\Gin@req@width=\dimen112
+)
+(/usr/local/texlive/2008/texmf-dist/tex/latex/amscls/amsthm.sty
+Package: amsthm 2004/08/06 v2.20
+\thm@style=\toks15
+\thm@bodyfont=\toks16
+\thm@headfont=\toks17
+\thm@notefont=\toks18
+\thm@headpunct=\toks19
+\thm@preskip=\skip66
+\thm@postskip=\skip67
+\thm@headsep=\skip68
+\dth@everypar=\toks20
+)
+(/usr/local/texlive/2008/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+Package: amsfonts 2001/10/25 v2.2f
+\@emptytoks=\toks21
+\symAMSa=\mathgroup11
+\symAMSb=\mathgroup12
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 132.
+)
+(/usr/local/texlive/2008/texmf-dist/tex/latex/amsfonts/amssymb.sty
+Package: amssymb 2002/01/22 v2.2d
+)
+\c@thm=\count97
+\c@lemma=\count98
+\c@corollary=\count99
+\c@assumption=\count100
+\c@defn=\count101
+\c@algorithm=\count102
+ (./jair.aux)
+\openout1 = `jair.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 201.
+LaTeX Font Info:    ... okay on input line 201.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 201.
+LaTeX Font Info:    ... okay on input line 201.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 201.
+LaTeX Font Info:    ... okay on input line 201.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 201.
+LaTeX Font Info:    ... okay on input line 201.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 201.
+LaTeX Font Info:    ... okay on input line 201.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 201.
+LaTeX Font Info:    ... okay on input line 201.
+ (/usr/local/texlive/2008/texmf-dist/tex/context/base/supp-pdf.tex
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count103
+\scratchdimen=\dimen113
+\scratchbox=\box28
+\nofMPsegments=\count104
+\nofMParguments=\count105
+\everyMPshowfont=\toks22
+\MPscratchCnt=\count106
+\MPscratchDim=\dimen114
+\MPnumerator=\count107
+\everyMPtoPDFconversion=\toks23
+)
+Missing character: There is no Õ in font cmr10!
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 269.
+
+ (/usr/local/texlive/2008/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <8> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 269.
+ [1{/usr/local/texlive/2008/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
+
+]
+LaTeX Font Info:    Try loading font information for U+lasy on input line 279.
+
+(/usr/local/texlive/2008/texmf-dist/tex/latex/base/ulasy.fd
+File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
+)
+LaTeX Font Info:    Try loading font information for U+msa on input line 279.
+
+(/usr/local/texlive/2008/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2002/01/19 v2.2g AMS font definitions
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 279.
+
+(/usr/local/texlive/2008/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2002/01/19 v2.2g AMS font definitions
+) [2]
+<../figures/deliberation_example_forsinglecolumn_noactions.pdf, id=16, 963.6pt 
+x 199.74625pt>
+File: ../figures/deliberation_example_forsinglecolumn_noactions.pdf Graphic fil
+e (type pdf)
+
+<use ../figures/deliberation_example_forsinglecolumn_noactions.pdf>
+Overfull \hbox (7.90598pt too wide) in paragraph at lines 366--367
+[]\OT1/cmr/m/n/10.95 The Plexus al-go-rithm was orig-i-nally de-vel-oped for at
+om-i-cally rep-re-sented robot-navigation
+ []
+
+[3 <../figures/deliberation_example_forsinglecolumn_noactions.pdf>]
+Underfull \vbox (badness 1939) has occurred while \output is active []
+
+ [4]
+Underfull \hbox (badness 10000) in paragraph at lines 491--492
+
+ []
+
+[5] <figs/eqeg.pdf, id=184, 784.9325pt x 502.87875pt>
+File: figs/eqeg.pdf Graphic file (type pdf)
+ <use figs/eqeg.pdf>
+[6] [7 <./figs/eqeg.pdf>] [8]
+\inoutsbox=\box29
+\inoutbox=\box30
+\inoutline=\dimen115
+\inoutline=\dimen116
+
+Underfull \vbox (badness 1997) has occurred while \output is active []
+
+ [9]
+[10]
+\inoutsbox=\box31
+\inoutbox=\box32
+\inoutline=\dimen117
+\inoutline=\dimen118
+ [11] <figs/transprob1.pdf, id=407, 2028.57875pt x 1017.8025pt>
+File: figs/transprob1.pdf Graphic file (type pdf)
+
+<use figs/transprob1.pdf>
+<figs/transprob2.pdf, id=408, 1928.20375pt x 1133.23375pt>
+File: figs/transprob2.pdf Graphic file (type pdf)
+
+<use figs/transprob2.pdf> [12] [13 <./figs/transprob1.pdf> <./figs/transprob2.p
+df>]
+\inoutsbox=\box33
+\inoutbox=\box34
+\inoutline=\dimen119
+\inoutline=\dimen120
+ [14]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [15]
+Underfull \hbox (badness 10000) in paragraph at lines 976--977
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 977--979
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 979--980
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 993--995
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 995--997
+
+ []
+
+[16] <figs/bs-rew-adap.pdf, id=586, 469.755pt x 358.33875pt>
+File: figs/bs-rew-adap.pdf Graphic file (type pdf)
+
+<use figs/bs-rew-adap.pdf>
+<figs/bz-rew-adap.pdf, id=587, 469.755pt x 358.33875pt>
+File: figs/bz-rew-adap.pdf Graphic file (type pdf)
+
+<use figs/bz-rew-adap.pdf>
+<figs/madb-rew-init.pdf, id=588, 469.755pt x 358.33875pt>
+File: figs/madb-rew-init.pdf Graphic file (type pdf)
+
+<use figs/madb-rew-init.pdf>
+<figs/madc-rew-init.pdf, id=589, 469.755pt x 358.33875pt>
+File: figs/madc-rew-init.pdf Graphic file (type pdf)
+
+<use figs/madc-rew-init.pdf> [17] [18 <./figs/bs-rew-adap.pdf> <./figs/bz-rew-a
+dap.pdf> <./figs/madb-rew-init.pdf> <./figs/madc-rew-init.pdf>] [19] [20]
+[21]
+Underfull \vbox (badness 1939) has occurred while \output is active []
+
+ [22]
+(./jair.bbl [23] [24]) [25] (./jair.aux) ) 
+Here is how much of TeX's memory you used:
+ 2050 strings out of 493876
+ 24554 string characters out of 1150567
+ 87443 words of memory out of 3000000
+ 5280 multiletter control sequences out of 10000+50000
+ 25966 words of font info for 99 fonts, out of 3000000 for 5000
+ 714 hyphenation exceptions out of 8191
+ 27i,30n,25p,1142b,440s stack positions out of 5000i,500n,10000p,200000b,50000s
+</usr/local/texlive/2008/texmf-dist/f
+onts/type1/bluesky/cm/cmbx10.pfb></usr/local/texlive/2008/texmf-dist/fonts/type
+1/bluesky/cm/cmbx12.pfb></usr/local/texlive/2008/texmf-dist/fonts/type1/bluesky
+/cm/cmcsc10.pfb></usr/local/texlive/2008/texmf-dist/fonts/type1/bluesky/cm/cmex
+10.pfb></usr/local/texlive/2008/texmf-dist/fonts/type1/bluesky/cm/cmmi10.pfb></
+usr/local/texlive/2008/texmf-dist/fonts/type1/bluesky/cm/cmmi6.pfb></usr/local/
+texlive/2008/texmf-dist/fonts/type1/bluesky/cm/cmmi7.pfb></usr/local/texlive/20
+08/texmf-dist/fonts/type1/bluesky/cm/cmmi8.pfb></usr/local/texlive/2008/texmf-d
+ist/fonts/type1/bluesky/cm/cmmi9.pfb></usr/local/texlive/2008/texmf-dist/fonts/
+type1/bluesky/cm/cmr10.pfb></usr/local/texlive/2008/texmf-dist/fonts/type1/blue
+sky/cm/cmr7.pfb></usr/local/texlive/2008/texmf-dist/fonts/type1/bluesky/cm/cmr8
+.pfb></usr/local/texlive/2008/texmf-dist/fonts/type1/bluesky/cm/cmr9.pfb></usr/
+local/texlive/2008/texmf-dist/fonts/type1/bluesky/cm/cmsy10.pfb></usr/local/tex
+live/2008/texmf-dist/fonts/type1/bluesky/cm/cmsy6.pfb></usr/local/texlive/2008/
+texmf-dist/fonts/type1/bluesky/cm/cmsy7.pfb></usr/local/texlive/2008/texmf-dist
+/fonts/type1/bluesky/cm/cmsy8.pfb></usr/local/texlive/2008/texmf-dist/fonts/typ
+e1/bluesky/cm/cmti10.pfb></usr/local/texlive/2008/texmf-dist/fonts/type1/bluesk
+y/cm/cmti8.pfb></usr/local/texlive/2008/texmf-dist/fonts/type1/bluesky/cm/cmti9
+.pfb></usr/local/texlive/2008/texmf-dist/fonts/type1/bluesky/cm/cmtt10.pfb></us
+r/local/texlive/2008/texmf-dist/fonts/type1/bluesky/ams/msbm10.pfb>
+Output written on jair.pdf (25 pages, 758044 bytes).
+PDF statistics:
+ 743 PDF objects out of 1000 (max. 8388607)
+ 0 named destinations out of 1000 (max. 131072)
+ 41 words of extra memory for PDF output out of 10000 (max. 10000000)
+

@@ -1,0 +1,193 @@
+\begin{thebibliography}{}
+
+\bibitem[\protect\BCAY{Armano, Cherchi, \BBA\ Vargiu}{Armano
+  et~al.}{2003}]{armano03}
+Armano, G., Cherchi, G., \BBA\ Vargiu, E. \BBOP2003\BBCP.
+\newblock \BBOQ Generating abstractions from static domain analysis\BBCQ\
+\newblock In {\Bem WOA 2003 (Dagli Oggetti agli Agenti, Sistemi Intelligenti e
+  Computazione Pervasiva)}.
+
+\bibitem[\protect\BCAY{Baum \BBA\ Nicholson}{Baum \BBA\
+  Nicholson}{1998}]{baum98}
+Baum, J.\BBACOMMA\  \BBA\ Nicholson, A. \BBOP1998\BBCP.
+\newblock \BBOQ Dynamic non-uniform abstractions for approximate planing in
+  large structured stochastic domains\BBCQ\
+\newblock In {\Bem 5th Pacific Rim Int'l Conference on Artificial
+  Intelligence}.
+
+\bibitem[\protect\BCAY{Bernedo-Schneider}{Bernedo-Schneider}{2006}]{bernedo06}
+Bernedo-Schneider, G. \BBOP2006\BBCP.
+\newblock \BBOQ Cognitive modeling of motivations for artificial agents\BBCQ\
+\newblock In Rome, E., Doherty, P., Dorffner, G., \BBA\ Hertzberg, J.\BEDS,
+  {\Bem Towards Affordance-Based Robot Control}, \lowercase{\BNUM}\ 06231 in
+  Dagstuhl Seminar Proceedings, Abstracts Collection. Internationales
+  Begegnungs- und Forschungszentrum f{\"u}r Informatik (IBFI), Dagstuhl,
+  Germany.
+
+\bibitem[\protect\BCAY{Bylander}{Bylander}{1994}]{bylander94}
+Bylander, T. \BBOP1994\BBCP.
+\newblock \BBOQ The computational complexity of propositional {STRIPS}
+  planning\BBCQ\
+\newblock {\Bem Artificial Intelligence}, {\Bem 69}.
+
+\bibitem[\protect\BCAY{Dean, Kaelbling, Kirman, \BBA\ Nicholson}{Dean
+  et~al.}{1995}]{dean95}
+Dean, T., Kaelbling, L.~P., Kirman, J., \BBA\ Nicholson, A. \BBOP1995\BBCP.
+\newblock \BBOQ Planning under time constraints in stochastic domains\BBCQ\
+\newblock {\Bem Artificial Intelligence}, {\Bem 76}.
+
+\bibitem[\protect\BCAY{Dean \BBA\ Boddy}{Dean \BBA\ Boddy}{1988}]{dean88}
+Dean, T.\BBACOMMA\  \BBA\ Boddy, M. \BBOP1988\BBCP.
+\newblock \BBOQ An analysis of time-dependent planning\BBCQ\
+\newblock In {\Bem AAAI-88}.
+
+\bibitem[\protect\BCAY{Edelkamp}{Edelkamp}{2001}]{edelkamp01}
+Edelkamp, S. \BBOP2001\BBCP.
+\newblock \BBOQ Plannning with pattern databases\BBCQ\
+\newblock In {\Bem European Conference on Planning}.
+
+\bibitem[\protect\BCAY{Fikes \BBA\ Nilsson}{Fikes \BBA\
+  Nilsson}{1971}]{fikes71}
+Fikes, R.~E.\BBACOMMA\  \BBA\ Nilsson, N.~J. \BBOP1971\BBCP.
+\newblock \BBOQ Strips: A new approach to the application of theorem proving to
+  problem solving\BBCQ\
+\newblock {\Bem Artificial Intelligence}, {\Bem 2}, 189--208.
+
+\bibitem[\protect\BCAY{Fox, Long, \BBA\ Porteous}{Fox
+  et~al.}{2007}]{foxlong07aaai}
+Fox, M., Long, D., \BBA\ Porteous, J. \BBOP2007\BBCP.
+\newblock \BBOQ Discovering near symmetry in graphs\BBCQ\
+\newblock In {\Bem Proceedings of AAAI}.
+
+\bibitem[\protect\BCAY{Gardiol}{Gardiol}{2007}]{gardiolphd}
+Gardiol, N.~H. \BBOP2007\BBCP.
+\newblock {\Bem Relational Envelope-based Planning}.
+\newblock Ph.D.\ thesis, MIT, Cambridge, MA.
+\newblock MIT-CSAIL-TR-2007-061.
+
+\bibitem[\protect\BCAY{Gardiol \BBA\ Kaelbling}{Gardiol \BBA\
+  Kaelbling}{2007}]{gardiol07}
+Gardiol, N.~H.\BBACOMMA\  \BBA\ Kaelbling, L.~P. \BBOP2007\BBCP.
+\newblock \BBOQ Action-space partitioning for planning\BBCQ\
+\newblock In {\Bem National Conference on Artificial Intelligence (AAAI)}\
+  Vancouver, Canada.
+
+\bibitem[\protect\BCAY{Gartner, Driessens, \BBA\ Ramon}{Gartner
+  et~al.}{2003}]{gartner03ilp}
+Gartner, T., Driessens, K., \BBA\ Ramon, J. \BBOP2003\BBCP.
+\newblock \BBOQ Graph kernels and gaussian processes for relational
+  reinforcement learning\BBCQ\
+\newblock In {\Bem Thirteenth International Conference on Inductive Logic
+  Programming (ILP-2003)}.
+
+\bibitem[\protect\BCAY{Gartner, Lloyd, \BBA\ Flach}{Gartner
+  et~al.}{2004}]{gartner04mlj}
+Gartner, T., Lloyd, J.~W., \BBA\ Flach, P.~A. \BBOP2004\BBCP.
+\newblock \BBOQ Kernels and distances for structured data\BBCQ\
+\newblock {\Bem Machine Learning}, {\Bem 3\/}(57).
+
+\bibitem[\protect\BCAY{Gibson}{Gibson}{1977}]{gibson77}
+Gibson, J.~J. \BBOP1977\BBCP.
+\newblock \BBOQ The theory of affordances\BBCQ\
+\newblock In Shaw, R.\BBACOMMA\  \BBA\ Bransford, J.\BEDS, {\Bem Perceiving,
+  Acting, and Knowing}. Lawrence Erlbaum Associates.
+
+\bibitem[\protect\BCAY{Givan, Leach, \BBA\ Dean}{Givan
+  et~al.}{1997}]{givan97bounded}
+Givan, R., Leach, S., \BBA\ Dean, T. \BBOP1997\BBCP.
+\newblock \BBOQ Bounded parameter {M}arkov decision processes\BBCQ\
+\newblock In {\Bem Proceedings of the European Conference on Planning}.
+
+\bibitem[\protect\BCAY{Givan, Leach, \BBA\ Dean}{Givan
+  et~al.}{2000}]{givan00boundedaij}
+Givan, R., Leach, S., \BBA\ Dean, T. \BBOP2000\BBCP.
+\newblock \BBOQ Bounded parameter {M}arkov decision processes\BBCQ\
+\newblock {\Bem Artificial Intelligence}.
+
+\bibitem[\protect\BCAY{Haslum \BBA\ Geffner}{Haslum \BBA\
+  Geffner}{2000}]{haslumgeffner00}
+Haslum, P.\BBACOMMA\  \BBA\ Geffner, H. \BBOP2000\BBCP.
+\newblock \BBOQ Admissible heuristics for optimal planning\BBCQ\
+\newblock In {\Bem AIPS}.
+
+\bibitem[\protect\BCAY{Haussler}{Haussler}{1999}]{haussler99tr}
+Haussler, D. \BBOP1999\BBCP.
+\newblock \BBOQ Convolution kernels on discrete structures\BBCQ\
+\newblock \BTR\ UCSC-CRL-99-10, University of California at Santa Cruz.
+
+\bibitem[\protect\BCAY{Hoffmann \BBA\ Nebel}{Hoffmann \BBA\
+  Nebel}{2001}]{hoffmann01jair}
+Hoffmann, J.\BBACOMMA\  \BBA\ Nebel, B. \BBOP2001\BBCP.
+\newblock \BBOQ The {FF} planning system: Fast plan generation through
+  heuristic search\BBCQ\
+\newblock {\Bem JAIR}, {\Bem 14}.
+
+\bibitem[\protect\BCAY{Knoblock}{Knoblock}{1994}]{knoblock94}
+Knoblock, C.~A. \BBOP1994\BBCP.
+\newblock \BBOQ Automatically generating abstractions for planning\BBCQ\
+\newblock {\Bem AIJ}, {\Bem 68}.
+
+\bibitem[\protect\BCAY{Korf}{Korf}{1998}]{korf98}
+Korf, R. \BBOP1998\BBCP.
+\newblock \BBOQ Finding optimal solutions to {R}ubik's cube using pattern
+  databases\BBCQ\
+\newblock In {\Bem AAAI}.
+
+\bibitem[\protect\BCAY{Kushmerick, Hanks, \BBA\ Weld}{Kushmerick
+  et~al.}{1995}]{kushmerick95aij}
+Kushmerick, N., Hanks, S., \BBA\ Weld, D. \BBOP1995\BBCP.
+\newblock \BBOQ Algorithm for probabilistic planning\BBCQ\
+\newblock {\Bem Artificial Intelligence}, {\Bem 76}.
+
+\bibitem[\protect\BCAY{Lane \BBA\ Kaelbling}{Lane \BBA\
+  Kaelbling}{2002}]{lane02}
+Lane, T.\BBACOMMA\  \BBA\ Kaelbling, L.~P. \BBOP2002\BBCP.
+\newblock \BBOQ Nearly deterministic abstractions of markov decision
+  processes\BBCQ\
+\newblock In {\Bem 18th AAAI}.
+
+\bibitem[\protect\BCAY{Majercik \BBA\ Littman}{Majercik \BBA\
+  Littman}{2003}]{majercik03}
+Majercik, S.~M.\BBACOMMA\  \BBA\ Littman, M.~L. \BBOP2003\BBCP.
+\newblock \BBOQ Contingent planning under uncertainty via stochastic
+  satisfiability\BBCQ\
+\newblock {\Bem Artificial Intelligence}, {\Bem 147}.
+
+\bibitem[\protect\BCAY{Miyazaki}{Miyazaki}{1997}]{miyazaki96}
+Miyazaki, T. \BBOP1997\BBCP.
+\newblock \BBOQ The complexity of {M}c{K}ay's canonical labeling
+  algorithm\BBCQ\
+\newblock {\Bem Groups and Computation {II}}, {\Bem 28}.
+
+\bibitem[\protect\BCAY{Molineaux \BBA\ Aha}{Molineaux \BBA\
+  Aha}{2005}]{molineaux}
+Molineaux, M.\BBACOMMA\  \BBA\ Aha, D.~W. \BBOP2005\BBCP.
+\newblock \BBOQ {TIELT}: A testbed for gaming environments\BBCQ\
+\newblock In {\Bem National Conference on Artificial Intelligence (AAAI)}.
+
+\bibitem[\protect\BCAY{Puterman}{Puterman}{1994}]{puterman94book}
+Puterman, M. \BBOP1994\BBCP.
+\newblock {\Bem {M}arkov decision processes: discrete stochastic dynamic
+  programming}.
+\newblock John Wiley \& Sons.
+
+\bibitem[\protect\BCAY{Sacerdoti}{Sacerdoti}{1974}]{sacerdoti74aij}
+Sacerdoti, E.~D. \BBOP1974\BBCP.
+\newblock \BBOQ Planning in a hierarchy of abstraction spaces\BBCQ\
+\newblock {\Bem AIJ}, {\Bem 5}, 115--135.
+
+\bibitem[\protect\BCAY{Vishwanathan \BBA\ Smola}{Vishwanathan \BBA\
+  Smola}{2004}]{vishwanathan04kb}
+Vishwanathan, S.\BBACOMMA\  \BBA\ Smola, A. \BBOP2004\BBCP.
+\newblock \BBOQ Fast kernels for string and tree matching\BBCQ\
+\newblock In Sch\"olkopf, B., Tsuda, K., \BBA\ Vert, J.\BEDS, {\Bem Kernel
+  Methods in Computational Biology}. MIT Press.
+
+\bibitem[\protect\BCAY{Younes \BBA\ Littman}{Younes \BBA\
+  Littman}{2004}]{younes04tr}
+Younes, H.\BBACOMMA\  \BBA\ Littman, M. \BBOP2004\BBCP.
+\newblock \BBOQ {PPDDL}1.0: An extension to {PDDL} for expressing planning
+  domains with probabilistic effects\BBCQ\
+\newblock \BTR\ CMU-CS-04-167, Carnegie Mellon.
+
+\end{thebibliography}

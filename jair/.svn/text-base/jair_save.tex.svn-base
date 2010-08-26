@@ -1,0 +1,1007 @@
+\documentstyle[jair,twoside,11pt,theapa,graphicx,amsthm]{article}
+\input epsf %% at top of file
+
+%\documentclass[jair,11pt]{article}
+
+\jairheading{?}{200?}{1-?}{5/08}{?}
+\ShortHeadings{Adaptive Relational Envelope MDPs}
+{Gardiol \& Kaelbling}
+\firstpageno{1}
+
+
+%\input graphicx
+%\usepackage{amsmath, amsthm, amssymb}
+%\usepackage{fancyvrb}
+%\usepackage{url}
+
+
+\newtheorem{thm}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newtheorem{assumption}{Assumption}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}
+
+
+\def\rebp{{\sc rebp}}
+\def\mdp{{\sc mdp}}
+\def\etal{{\it et al.}}
+\def\rebp{{\sc rebp}}
+\def\mdp{{\sc mdp}}
+\def\pomdp{{\sc pomdp}}
+\def\out{{\sc out}}
+\def\strips{{\sc strips}}
+
+\newcommand{\figref}[1]{Figure~\ref{#1}}
+\newcommand{\ntt}[1]{{\small{\tt #1}}}
+\newcommand{\pic}[3]{
+  \includegraphics[scale=#1,angle=#2]{#3}
+}
+
+
+
+
+
+%%
+\def\strips{{\sc strips}}
+\def\rebp{{\sc rebp}}
+\def\mdp{{\sc mdp}}
+\def\etal{{\it et al.}}
+\def\out{{\sc out}}
+
+%command to put things in brackets
+\newcommand{\bk}[1]{ \ensuremath{ \left\{  \hspace{-4pt}
+ \begin{array}{c}
+  #1
+ \end{array} \hspace{-4pt} \right\}  }
+}
+%command to put things in brackets
+\newcommand{\sqbk}[1]{ \ensuremath{
+   \mathsf{[\ #1\ ]}
+}}
+%command to make a rule
+\newcommand{\opmultiline}[6]{
+ \begin{array}{|l|}
+#2\\
+\vspace{-7pt}\\
+%\hspace{10pt}
+\stackrel{ #1 }{\longrightarrow} 
+ \left\{ \begin{array}{ll}
+        #3 & #4 \\
+        #5 & #6
+        \end{array} \right.
+        \end{array}
+
+}
+%command to make a rule
+\newcommand{\opmultilineB}[7]{
+ \begin{eqnarray*}
+\lefteqn{ #2  }\\
+& &
+  \hspace{#7} \stackrel{ #1 }{\longrightarrow} 
+ \left\{ \begin{array}{ll}
+        #3 & #4 \\
+        #5 & #6
+        \end{array} \right.
+        \end{eqnarray*}
+
+}
+\newcommand{\opmultilineC}[6]{
+ \begin{eqnarray*}
+\lefteqn{ when( #1 ) }\\
+& &
+  \hspace{#6} \rightarrow
+ \left\{ \begin{array}{ll}
+        #2 & #3 \\
+        #4 & #5 
+        \end{array} \right.
+        \end{eqnarray*}
+}
+\newcommand{\opmultilineCond}[8]{
+ \begin{eqnarray*}
+\lefteqn{ #2 ) }\\
+& &
+  \hspace{#7} \stackrel{ #1 }{\longrightarrow} 
+ \left\{ \begin{array}{ll}
+        #3 & #4 \\
+        #5 & #6 \\
+           & #8 
+        \end{array} \right.
+        \end{eqnarray*}
+}
+
+\newcommand{\opmultilineCondB}[7]{
+ \begin{eqnarray*}
+\lefteqn{ #2 ) \stackrel{ #1 }{\longrightarrow} }\\
+& & \left\{ \begin{array}{ll}
+           & #7 \\
+        #3 & #4 \\
+        #5 & #6 
+        \end{array} \right.
+        \end{eqnarray*}
+}
+
+\newcommand{\oppretty}[6]{
+\( #2  \stackrel{ #1 }{\longrightarrow}
+\left\{ \begin{array}{ll}
+        #3 & #4 \\
+        #5 & #6
+        \end{array} \right. \)
+}
+
+
+\newcommand{\opdet}[3]{
+\( \begin{array}{l}
+#2 \\
+\vspace{-7pt}\\
+\stackrel{#1}{\longrightarrow} 
+\left\{ \begin{array}{ll}
+        #3
+        \end{array} \right.
+
+\end{array} \)
+}
+
+\newcommand{\pddlstoch}[6]{
+\( \begin{array}{lll}
+%\grt{op}&  \hspace{-10pt}:& \hspace{-4pt} #1 \\
+\multicolumn{3}{l}{#1} \\
+\mathit{pre}& \hspace{-10pt}:& \hspace{-4pt} #2 \\
+\mathit{eff}& \hspace{-10pt}:& \hspace{-4pt} \begin{array}{ll} 
+       \hspace{-4pt} \sqbk{#3} & \hspace{-4pt} #4 \\
+       \hspace{-4pt}  \sqbk{#5} & \hspace{-4pt} #6 
+        \end{array}
+\end{array} \)
+}
+\newcommand{\pddldet}[3]{
+\( \begin{array}{lll}
+\multicolumn{3}{l}{#1} \\
+\mathit{pre}& \hspace{-10pt}:& \hspace{-4pt} #2 \\
+\mathit{eff}& \hspace{-10pt}: &\hspace{-4pt} \sqbk{1.00} \hspace{4pt} #3
+%grt{eff}& \hspace{-10pt}:& \hspace{-4pt} #3
+\end{array} \)
+}
+
+\newcommand{\opa}[4]{
+ \pddldet{ \sym{#1}{#2} }{\paren{#3}}{\paren{#4}}
+}
+
+\newcommand{\opb}[7]{
+ \pddlstoch{ \sym{#1}{#2} }{ \paren{#3} }{#4}{ \paren{#5} }{#6}{ \paren{#7} }
+}
+\newcommand{\opbs}[7]{
+ \oppretty{ \sym{#1}{#2} }{ \sym{}{#3} }{#4}{ \sym{}{#5} }{#6}{ \sym{}{#7} }
+}
+%%
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{document}
+
+\title{Adaptive Relational Envelope MDPs}
+
+\author{\name Natalia H. Gardiol \email nhg@csail.mit.edu \\
+       \name Leslie Pack Kaelbling \email lpk@csail.mit.edu \\
+       \addr MIT CSAIL,\\
+       Cambridge, MA 02139 USA}
+
+% For research notes, remove the comment character in the line below.
+% \researchnote
+
+\maketitle
+
+
+\begin{abstract}
+
+In this work, we use structured representations of the environment's dynamics to constrain and speed up the planning process.  
+Given a problem domain described in a probabilistic logical description language, 
+we develop an anytime technique that incrementally improves on an initial, partial policy. This partial solution is  found quickly: first, by reducing to a minimum the number of predicates needed to represent a relaxed version of the problem, and second, by 
+dynamically partitioning the action space into a set of equivalence classes with respect to this minimal representation. 
+This results in an efficient planning process that reduces the branching factor wherever possible.
+ Our approach uses the 
+\emph{envelope {\sc mdp}} framework, which creates a Markov decision process out of a subset of the possible state space determined by the initial partial solution. This strategy permits an agent to begin acting quickly
+within a restricted part of the full state space
+and to expand its envelope judiciously as resources permit.
+Finally, we show how the representation space itself can be elaborated within the anytime framework. 
+
+
+\end{abstract}
+
+\section{Introduction}
+\label{Introduction}
+
+For an intelligent agent to operate efficiently in a highly complex
+domain, its only hope is to identify and gain leverage from structure
+in its domain.  Household robots, office assistants, and logistics
+support systems, for example, will have to solve planning problems
+``in the wild'', in contrast to most planning problems addressed
+today, which are carefully formulated by humans to contain only domain
+aspects actually relevant to achieving the goal.  Generally speaking,
+planning in a formal model of the agent's entire ``wild'' environment
+will be intractable; instead, the agent will have to find ways to
+reformulate a problem into a more tractable version at run time.
+
+Not only will such domains require an adaptive representation, but,
+adaptive aspirations as well. That is, if the agent is under time
+pressure to act, then, we must be willing to accept some trade-off in
+the quality of behavior. However, as time goes on, we would expect the
+agents behavior to become more robust and to improve in quality.
+
+%We want planning techniques that can deal with large state spaces and
+%large, stochastic action sets since most compelling, realistic domains
+%have these characteristics.
+
+
+This work is about taking advantage of structured, relational action
+representations for planning. Our aim is to make small models of big
+domains in order to act efficiently. We will go about this
+simplification by reducing, if possible, the number of distinct
+entities and the number of alternative outcomes under consideration.
+
+
+To reduce the number of effective entities (that is, domain objects),
+we adapt our representation: we identify the minimum set of predicates needed to represent our problem, and we identify logical equivalence classes
+of objects with respect to those predicates. This, in turn, induces equivalence classes over the state space and
+allows us to handle a class of states together as a group. This has
+the important consequence of inducing a partition over the action
+space, as well.  This constrained action space, in conjunction with a
+\emph{determinizing} step, allows us to begin the search for plans in
+an informative subset of the decision space. Finally, we want to turn
+these optimistic plans into increasingly robust policies by
+incrementally expanding the state-space envelope, as well as the set of predicates used in representation,
+ as time and resources
+permit.
+
+There are two main themes in our approach: that of leveraging
+structured representations to maintain a small, compact model of a
+planning task, and that of managing time pressure by producing
+policies that improve in expectation with the amount of available
+computation time.
+
+
+\subsection{Handling imperfect representations}
+
+
+One source of difficulty in a complex domain is the existence of large
+numbers of objects that are either irrelevant to a given planning
+problem or, worse, relevant but unnecessary.  We are often given these
+descriptions separately: a general domain description that describes
+the types of objects available, the kinds of relations and properties
+they can have, and the set of rules that describes the dynamics; and,
+a separate problem description that specifies a particular instance of
+the domain along with a specific planning objective.
+
+A formal description of a domain instance may produce an
+overwhelmingly large action space even for a modest number of objects
+in the world.  Consider an assembly robot, with a box of thousands of
+identical gears.  The robot needs one of those gears to do its job, so
+none of those gears are irrelevant.  But, because they are equivalent,
+it ought to be able to consider only a single one of them.  Our goal
+in this work is to exploit the effective equivalence of objects in
+order to simplify planning.  One way to do this is to consider objects
+to be similar if they share similar properties and have similar
+relationships to other, similar, objects.  In principle, the set of
+properties and relationships is given by the set of predicates listed
+in the domain description.  However, if not all of these predicates
+are equally necessary to achieve the given goal, then considering them
+all would mean making unnecessary distinctions between objects. We
+would like to detect this phenomenon and consider distinctions among
+objects only with respect to the smallest possible set of predicates
+necessary to achieve a given problem.  This would have the effect of
+reducing the effective size of the state space and, thus, speed up the
+planning process.
+
+
+\subsection{Managing time-pressure to act}
+
+%plans vs. policies
+For an agent operating in the real world, a time-crunch is a fact of
+life: no one will put up with a robot that takes forever to come up
+with the perfect way to put gears into boxes, for example.  So, this
+work is also about how best to manage the computation of a strategy.
+When is it appropriate to make a plan, and when is it appropriate to
+compute a policy?  By planning, we refer to the idea of computing a
+sequence of actions, to use once, for a given state/goal pair.  A
+policy, on the other hand, is a mapping from all states in a space to
+the appropriate action; in general, we compute a policy when we expect
+to be given the same task repeatedly and need to consider any possible
+eventuality. When do we wish to do one instead of the other, and what
+can we say about the spectrum between the two?  We have developed a
+technique that employs \emph{envelope-based planners}, which are
+interesting in that they explicitly inhabit the space between a plan
+and a policy.  The \emph{envelope} refers to the subset of states,
+selected via some appropriate process, that form the basis for a
+small, approximate model of the agent's policy.  Any planning approach
+can be used as this generating process: the envelope is then initially
+populated with the states from the plan.  What follows is an
+\emph{anytime} procedure~\cite{dean88} that elaborates on this initial
+set of states.  An \emph{anytime} algorithm is one that generates the
+best answer with the available information and allowable time; given
+more computational resources, it will be able to improve on its
+answer.  This strategy allows an agent to make a partial policy that
+hedges against the most likely deviations from the expected course of
+action, without requiring construction of a complete policy.
+
+
+We cast our planning problem in the framework of Markov decision
+processes (\mdp s)~\cite{puterman94book}.  \mdp s are a powerful
+formalism for framing sequential decision-making problems and are an
+active research area with a large spectrum of solution methods.  
+
+
+\section{Representing planning problems as MDPs}
+
+
+The problem of planning has been an important research area of AI
+since almost the inception of the field.  However, even its
+``simplest'' setting, that of deterministic {\sc strips} planning, has
+been found to be {\sc pspace}-complete.~\cite{bylander94}.
+Nonetheless, traditional AI planning techniques are often able to
+manage very large state spaces, largely due to powerful logical
+representations that enable structural features of the state and
+action spaces to be leveraged for efficiency.  On the other hand, work
+in the operations research community (OR) has developed the framework
+of \mdp s, which specifically addresses uncertainty in dynamical
+systems.  Being able to address uncertainty (not only in acting, but,
+also in sensing, which we do not address in this work) is a primary
+requirement for any system to be applicable to a wide range of
+real-world problems.
+
+Our aim is to bring together some of these complementary features of
+AI planning and \mdp\ solution techniques to produce a system that can
+build on the strengths of both.  An important result that enables our
+approach is that problems of goal-achievement, as typically seen in AI
+planning problems, are equivalent to general reward problems (and vice
+versa).~\cite{majercik03} Thus, it will be possible for us to take a
+given planning planning problem and convert it to an equivalent \mdp.
+
+ 
+\subsection{Representation in MDPs}
+
+An \mdp\ is a tuple, $\langle
+\mathcal{Q,A,T,R}\rangle$ where: $\mathcal{Q}$ is a set of states;
+$\mathcal{A}$ is a set of
+actions applicable in each state; $\mathcal{R}$ is a reward function mapping each state to a real number: 
+$\mathcal{R}: \mathcal{Q} \rightarrow \Re $  ;
+and $\mathcal{T}$, the transition function, gives the probability that a state and action pair will transition to another state: 
+$\mathcal{T}: \mathcal{Q} \times \mathcal{A} \times \mathcal{Q} \rightarrow \Re $.  
+A \emph{solution} for an \mdp\ consists in finding
+the best mapping from states to actions in a way that
+maximizes long-term reward. This function, $\pi$, is called a \emph{policy}.
+
+
+In the past, much  work on finding policies for \mdp s considered
+a state to be an atomic, indivisible entity; that is, one referred to
+state $s_{124}$ without knowing anything further about its internal
+structure.   More recently, advances have been made in representing a
+\mdp\ states in terms of \emph{factored} state spaces; that is, an
+particular state is seen to be a combination of state features.  For
+example, in a two-dimensional grid domain, state $s_{124}$ might be known to
+correspond to a particular $x,y$-coordinate, say $(3,45)$.  In this
+case, the state space is factored into two features:
+the value of the $x$-coordinate and the value of the $y$-coordinate.
+
+Even though a factored state representation is an improvement over an
+atomic state representation, it still has its limitations. The state
+features as described above correspond to \emph{propositions} about a
+state: e.g., the $x$-coordinate has value 3.  This means that the
+policy $\pi$, the transition function $T$, and the reward function $R$
+must cover possible
+combinations of values of all of the state features.  When there are
+lots of features, or if the features can take on a large range
+of values, the size of the state space grows combinatorially.  As long as the transition function $T$ and the reward function $R$ have a compact representation that can be exploited for efficiency during planning, however, we can be relatively insensitive to the size of the state space. 
+
+In this work, we take advantage of a more compact way of representing
+state transitions (i.e., actions).  That is, rather than a state being composed of a
+set of propositional features, we think of it as being composed
+instead of a set of logical relationships between domain objects.
+Since these predicates can make assertions
+about logical \emph{variables}, a single predicate may in fact
+represent a large number of ground propositions.  This lets us use a
+single transition rule to represent many ground state transitions.   
+
+
+
+\subsection{Rule language}
+
+
+  A well-specified planning problem contains two basic elements:
+
+\begin{description}
+\item [Domain Description]: The domain description specifies the {\em dynamics}
+of the world, the \emph{types} of objects that can exist in the world,
+and the set of logical \emph{predicates} which comprise the set of
+relationships and properties that can hold for the objects in this
+domain.  
+\item [Problem Instance]: To specify a given problem instance, we need an
+{\em Initial World State}, which is the set of ground predicates that are
+initially true for a given set of objects. We also need a
+{\em Goal Condition,} which is a first-order sentence that defines 
+the task to be achieved.  The goal condition is usually a conjunction,
+ though disjunctive conditions are legal, and it may be universally or existentially quantified.
+\end{description}
+
+
+
+The dynamics of the domain must be 
+expressed in a particular rule language. In our case, 
+the language used is the
+Probabilistic Planning and Domain Definition Language ({\sc ppddl})
+\cite{younes03}, which extends the classical 
+ \strips\
+language~\cite{fikes71,kushmerick95aij} to probabilistic domains.
+This allows for a very natural description of rule effects, such as
+conditional effects, negated preconditions, quantified effects, and so on.
+
+
+We will say ``rule'' or ``operator'' when we mean an open or unground rule such as they appear in the domain description, and we will say ``action'' to denote a ground instance of a rule.
+
+
+The benefit of supporting the {\sc ppddl} formalism is access
+to the benchmark planning domains, such as those used in the {\sc icaps} 
+ planning competitions held over the past few years. This permits our
+work to be more directly comparable to related approaches.
+
+
+
+\subsection{Encoding Markovian dynamics with rules}\label{rmdpdef}
+
+
+
+As mentioned above, an \mdp\ is traditionally defined as a tuple, $\langle
+\mathcal{Q,A,T,R}\rangle$ where: $\mathcal{Q}$ is a set of states;
+$\mathcal{A}$ is a set of
+actions; $\mathcal{R}$ is a reward function;
+and $\mathcal{T}$ is a transition function.    
+
+As a step towards working with more compact models of a domain, we 
+define a relational \mdp\ ({\sc rmdp}) as a tuple $\langle \mathcal{P,Z,O,T,}\mathit{R} \rangle$:
+
+\emph{States:} The set of states $\mathcal{Q}$ is defined by a finite set
+$\mathcal{P}$ of relational predicates, representing the 
+relations that can hold among the finite set of domain objects,
+$\mathcal{O}$. Each {\sc rmdp} state is an \emph{interpretation}
+of the domain predicates over the domain objects. By \emph{interpretation}, 
+we mean a mapping from all ground predicates  to truth values. For example,
+given the atom \emph{on(A,B)} and domain objects {\tt block1} and
+{\tt block2}, we would produce the propositions {\tt on(block1,
+block2)} and {\tt on(block2, block1)}, which might be respectively
+assigned \{{\tt true, false}\}, \{{\tt false, true}\}, \{{\tt false,
+false}\}, but probably not \{{\tt true, true}\}.
+ 
+
+\emph{Actions:} The set of ground actions, likewise, depends, on the
+  set of rules $\mathcal{Z}$ and the objects in the world. 
+  
+\emph{Transition Dynamics:} For the transition dynamics, we use a
+compact set of rules based on the standard Probabilistic Planning and
+Domain Definition Language ({\sc ppddl}) \cite{younes03} as discussed above.
+To briefly review,  a rule's
+behavior is defined by a precondition and a probabilistic effect, each
+expressed as conjunctions of logical predicates. A probabilistic
+effect describes a distribution over a disjoint set of logical
+outcomes.  A rule applies in a state if its precondition is true in
+the interpretation associated with the state.
+  Each outcome then describes a possible resulting ground
+state.  In our system, we currently use rules that are designed by
+hand; they may, however, be obtained via learning
+\cite{zettlemoyer05aaai,pasula07}.
+
+
+For each action, the distribution over
+next states is given compactly by the distribution over outcomes encoded in
+the rule schema.  The rule
+outcomes themselves usually only specify a subset of the domain
+predicates, effectively describing a set of possible resulting
+ground states.  To fill in the values of the domain predicates not
+menioned in the outcome, we assume a static frame: state predicates
+not directly changed by the rule are assumed to remain the same.
+
+\emph{Rewards:} A state is deterministically mapped to a scalar reward
+  according to function $R(s)$. 
+This can be given as, say, a list of conjunctions associating particular
+conditions (for example, the goal condition) with a scalar reward or
+penalty.
+
+Given this basic understanding, we can now begin to put together the
+pieces
+of our approach. 
+
+
+
+\section{Envelope-based Planning}
+
+As alluded to above, the difficulty of planning effectively in
+complex, ongoing problems is maintaining an efficient, compact model
+of the world in spite of potentially large ground state and action
+spaces.
+
+
+
+%At a high level, this approach proceeds in two phases.  First, given a
+%planning problem, an initial plan of action must be quickly found.
+%Second, if the agent is given additional time, it can elaborate the
+%original plan by considering deviations from its initial action
+%choices.  \figref{overview} shows a very high-level system diagram of
+%the main parts of this system.
+
+Plexus works by considering a subset of states with which to form a
+restricted \mdp, and then searching for an optimal policy in this
+restricted \mdp.  The state space for the restricted \mdp\ is called
+the \emph{envelope}: it consists of a subset of the whole system state
+space, and it is augmented by a special state called {\sc out}
+representing any state outside of the envelope.  The algorithm then
+works by alternating phases of \emph{envelope alteration}, which adds states to
+or removes states from the envelope, and \emph{policy generation}, which
+computes a policy for the given envelope. In order to guarantee the
+anytime behavior of the algorithm, Dean \etal\ extensively study the
+issue of \emph{deliberation scheduling} to determine how best to
+devote computational resources between envelope alteration and policy
+generation.
+
+ A complete round of deliberation
+involves sampling from the current policy to estimate which
+\emph{fringe} states --- states one step outside of the envelope ---
+are likely. The figure shows the incorporation of  an
+alternative outcome of the policy action
+in which the gripper breaks. After the envelope is expanded to include
+the new state,
+the policy is re-computed.  In the figure, the policy now specifies
+the \emph{fix} action in case of gripper breakage.
+
+Thus, deliberation can produce increasingly sophisticated plans. The 
+initial planner needs to be quick, and as such may not be able to find conditional
+plans, though it can develop one through deliberation; conversely, searching for this conditional plan in the space of all
+\mdp\ policies, without the benefit of the initial envelope, could potentially
+have taken too long.
+
+
+
+
+
+To implement envelope-based
+  planning in relational domains, then, we need a set of
+  probabilistic relational rules, which tell us the transition
+  dynamics for a domain; and we need a problem description, which tells us the
+  states and reward.  Together, the description of a domain and a problem instance fully specify our planning task.
+  As we will see, using the equivalence-based envelope method, we can take  advantage of
+relational generalization to produce good initial plans efficiently,
+and use envelope-growing techniques to improve the robustness of our
+plans incrementally as time permits.  \rebp\ is a planning system that
+tries to dynamically reformulate an apparently intractable problem
+into a small, easily handled problem at run time.
+
+
+
+
+
+
+
+\section{Formally defining equivalence}\label{chap-formal}
+
+
+
+The complexity of planning is driven primarily by the length of the
+solution and the branching factor of the search.  The solution length
+can sometimes be effectively reduced using hierarchical techniques.
+The branching factor can often be reduced, in effect, by an efficient
+heuristic.  We will provide a novel method for reducing the
+branching factor by dynamically grouping the agent's actions into
+\emph{state-dependent equivalence classes}, and only considering a single
+action from each class in the search.  This method can dramatically
+reduce the size of the search space, while preserving correctness and
+completeness of the planning algorithm.  It can be combined with
+heuristic functions and other methods for improving planning speed.
+
+
+\subsection{Assumptions  and definitions}
+
+\begin{assumption}[Sufficiency of Object Properties]
+  We assume a domain object's function is determined solely by its
+properties and relations to other objects, and not by its
+name.\label{identity_assumption}
+\end{assumption}
+
+
+  An important consequence of this assumption is that it will be necessary to support fully quantified goal sentences, a considerable generalization to the propositional goals typically handled by planning systems. If we are in a setting in
+  which a few objects' identities are in fact necessary, say by being named in the goal sentence, then we
+  encode this information via supplementary properties. That is, we add a
+  relation such as {\em is-block14(X)} that would only be true for
+  {\tt block14}.  Obviously, if identity matters for a large number of
+  objects, the approach presented here would not generate much improvement.
+
+
+Intuitively, we mean to say that two objects are equivalent to each
+other if they are related in the same way to other objects that are,
+in turn, equivalent.
+
+
+\begin{figure*}
+  \centerline{\pic{.77}{0}{figs/chap4_stateeqeg.pdf}}
+  \caption{An example of determining equivalence between states $s_1$ and $s_2$. The first step is to construct the state relation graphs $G_{s_1}$ and  $G_{s_2}$. Nodes are labeled with their corresponding object's type and properties, and edges are labeled with the corresponding relation's name. Then, we look for a mapping, $\phi$, between the two graphs.}
+  \label{stateeg}
+  \end{figure*}
+
+
+We will start by defining an equivalence relation on states.  To do
+this, we will view the relational state description of a state $s$ as
+a graph, called the \emph{state relation graph}, and denoted
+$\mathcal{G}_s$.  The nodes in the graph correspond to objects in the
+domain, and the edges correspond to binary relations between the objects. 
+Relations with more than two arguments, e.g., {\em refuel(h1,level1,level2)}, can be represented making edges that ``split'' the relation, e.g., {\em refuel$_1$(h1,level1)} and {\em refuel$_2$(level1,level2)}.
+ In addition, nodes and edges have a
+\emph{label}, $\mathcal{L}$, which is a set of
+strings. The label for each node contains the
+object's type and the values of any other unary predicates in the
+domain; the label for each edge contains the relation's
+name. Two states are equivalent if there is a one-to-one
+mapping between the objects that preserves node and edge labels of the
+state relation graphs.  That is:
+
+\noindent {\bf State equivalence}:\emph{
+Two \emph{states} $s_1$ and $s_2$ are {\em equivalent}, denoted
+  $s_1 \sim s_2$, if there exists
+ an isomorphism, 
+ $\phi$, between the respective state relation graphs:
+ $\phi(\mathcal{G}_{s_1})=\mathcal{G}_{s_2}$.
+}
+\begin{figure*}
+  \centerline{\pic{.77}{0}{figs/chap4_actioneqeg.pdf}}
+  \caption{An example of determining whether two ground actions belong in the same equivalence class. Two ground actions are equivalent, by definition, if they result in equivalent successor states.}
+  \label{actioneg}
+  \end{figure*}
+
+
+
+
+
+
+
+We use the notation $\gamma(a,s)$ to refer to the state that results from taking action $a$ in state $s$.
+If $a$ is an action following the {\sc pddl} syntax, then we calculate $\gamma(a,s)$ by removing from $s$ all the atoms in $a$'s \emph{delete list} and adding all the atoms in $a$'s \emph{add list}.
+We will sometimes refer to this calculation of $\gamma(a,s)$ as ``propagating'' $s$ through the dynamics of $a$. 
+More precisely, we write: 
+
+ \[ \gamma(a, s))  =  \phi( s \cup add(a) \setminus del(a)), \]
+
+Where $del(a)$ refers to set the atoms that are negated in the effect of $a$, and $add(a)$ refers to the set of atoms that are non-negated in the effect of $a$.
+
+With respect to a given state $s$, then, we define two ground actions  $a_1$ and
+  $a_2$ to be
+equivalent if they produce equivalent successor states,  $\gamma(a_1,s)$ and $\gamma(a_2,s)$:
+ 
+\noindent {\bf Action equivalence}:\emph{ Two \emph{actions} $a_1$ and
+  $a_2$ are {\em equivalent} in a state $s$, denoted $a_1 \sim a_2$,
+  iff $\gamma(a_1,s) \sim \gamma(a_2,s)$ }
+
+Since our objective is to group \emph{all} actions in a state into equivalence classes,
+ this
+definition can be unwieldy to use directly in the calculation of equivalent actions: it requires propagation
+of the state through each action's dynamics in order to look for pairs of resulting states that are equivalent.  We can, instead, {\em overload} the notion
+of isomorphism to apply to actions and develop a test on the starting state and
+actions directly, without propagation.  In {\sc ppddl} and related
+formalisms, actions can be thought of as ground applications of
+predicates.  Thus, each argument in a ground action will correspond
+to an object in the state, and, thus, to a node in the state
+relation graph. So, two actions applicable in a state $s$
+are provably equivalent if: (1)
+they are each ground instances of the same operator, and (2) there exists
+a mapping $\phi(s) = s$ 
+that will map the arguments of one action to
+arguments of the other. In this case, since the isomorphism $\phi$
+that we seek is
+a mapping between $s$ and itself, it is called an {\em
+  automorphism}. 
+We compute action equivalence via the notion of action isomorphism, defined formally as follows:
+
+\noindent {\bf Action isomorphism}:\emph{ Two actions $a_1$ and
+  $a_2$ are {\em isomorphic} in a state $s$, denoted $a_1 \sim_s a_2$,
+  iff there exists
+ an automorphism for s, 
+ $\phi(s)=s$, such that
+ $\phi(a_1)=a_2$.}
+
+
+\section{Consequences and main theorem}
+ 
+To show that the relations $\sim$ and $\sim_s$ defined in the definition of state equivalence and action isomorphism
+ are in fact equivalence relations, we have to show that they
+are reflexive, symmetric, and
+transitive.
+
+
+\begin{lemma}
+Relation-graph isomorphism defines an equivalence relation on states
+and actions.
+\end{lemma}
+\vspace{0in}\emph{Proof.} First, 
+a state $s$ produces a unique relation graph
+$\mathcal{G}_{s}$, and there always exists the identity mapping from
+$\mathcal{G}_{s}$ to $\mathcal{G}_{s}$, so we conclude $s \sim s$. Next, if  $s_1 \sim s_2$, then
+there exists  $\phi$ such that
+ $\phi(\mathcal{G}_{s_1})=\mathcal{G}_{s_2} $. Since  $\phi$ is
+bijective, it has an inverse, 
+$\phi^{-1}(\mathcal{G}_{s_2})=\mathcal{G}_{s_1}$, and so we conclude $s_2 \sim
+s_1$. Finally, if $s_1 \sim s_2$ and $s_2 \sim s_3$, then there exist
+$\phi_1$ such that $\phi_1(\mathcal{G}_{s_1})=\mathcal{G}_{s_2} $ and
+$\phi_2$ such that $\phi_2(\mathcal{G}_{s_2})=\mathcal{G}_{s_3}
+$. Thus $\phi_2(\phi_1(\mathcal{G}_{s_1}))=\mathcal{G}_{s_3}$, which
+implies $s_1 \sim s_3$. The argument for actions is analogous.
+\hfill $\Box$
+
+
+
+Since the relation $\sim$ is an equivalence relation, we denote the
+equivalence class containing item $x$ as $[x]$.
+
+
+Next, we see that if a logical sentence is satisfied
+in a state $s$, then it can be satisfied in any state $\tilde{s} \in
+[s]$. We assume that a ground  state is a fully
+ground list of facts (which we can treat as a conjunction of ground atoms). 
+When we say that a state entails a sentence, we are
+speaking purely of syntactic entailment.
+
+\begin{lemma}\label{lemmasat}
+If a sentence $\rho$ is syntactically entailed by a state $s$, then it is entailed
+by any $\tilde{s} \in [s]$
+  \end{lemma}
+\vspace{0in}\emph{Proof.}
+Let $\phi(s)=\tilde{s}$. If sentence $\rho$ is entailed by $s$, then there is some substitution
+$\psi$ for the variables in $\rho$ such that $\psi(\rho)$ is a
+subset of $s$.   In other words, $s \models \rho$ if and only if
+$\exists \psi . \psi(\rho) \subseteq s$.
+Assume  $\rho$ is entailed by $s$, and let  $\psi(\rho) \subseteq
+s$. We know by equivalence of $s$ and $\tilde{s}$ that there exists a mapping $ \phi^{-1}$ such that:
+
+\begin{eqnarray*}
+  \phi^{-1}(\tilde{s})& =& s.  \\
+  \textrm{So, } \psi(\rho) &\subseteq& \phi^{-1}(\tilde{s}), \\
+  \textrm{and, } (\phi^{-1})^{-1}(\psi(\rho))& \subseteq& \tilde{s}. \\
+  \textrm{Let } \psi'& =& \phi \circ \psi.\\
+  \textrm{Then, } \psi'(\rho) &\subseteq &\tilde{s}, \textrm{ and, thus} \\
+   \tilde{s} &\vdash & \rho.
+  \end{eqnarray*}\hfill $\Box$
+  
+  What we are saying in the above proof is this: if we have a substitution ($\psi$) that makes a sentence ($\rho$) true in a state ($s$), then, we can make that sentence true in a second state ($\tilde{s})$ by composing the mapping between the two states ($\Psi$) along with our original substitution ($\psi$) to make a new, satisfying, substitution ($\psi'$). 
+  
+  As an example, consider the states $s_1$ and $s_2$ (in~\figref{stateeg}) and a sentence, 
+  $ \rho:  on(A,B), on(B,D)$.
+  Applying the substitution,
+   $ \psi = \{ A / \mathtt{0}, B / \mathtt{2}, D / \mathtt{table} \} $ to $\rho$ 
+   yields the ground sentence
+   \[ \mathtt{on(0,2), on(2,table)},\]
+ which is a subset of the complete state in $s_1$:  
+   \[ \mathtt{on(0,2), on(2,table), on(4,table), is-table(table) }.\]
+   
+ Now, previously, we found that there exists a $\phi$ such that $\phi(s_1) = s_2 $, meaning that, each object $v$ in $s_1$ corresponds uniquely to $\phi(v)$ in $s_2$: 
+ \[ \begin{array}{c|c}
+     v & \phi(v) \\ \hline
+\mathtt{0} &  \mathtt{1}\\ \hline
+\mathtt{2} &  \mathtt{3}\\ \hline
+\mathtt{4} &  \mathtt{5}\\ \hline
+\mathtt{table} &  \mathtt{table}\\ 
+\end{array} \]
+  To get the substitution that makes $\rho$ true in $s_2$, we compose $\psi$ with $\phi$:
+ \[  \{ \phi(\mathtt{0}) / A, \phi(\mathtt{2}) / B, \phi(\mathtt{table}) / D \}, \]
+ which yields the substitution 
+ \[ \{  \mathtt{1} / A,  \mathtt{3} / B,  \mathtt{table} / D \} \]
+ and, thus, the ground sentence 
+ \[ \mathtt{on(1,3), on(3,table)},\]
+ which is a subset of the complete state in $s_2$:  
+   \[ \mathtt{on(1,3), on(3,table), on(5,table), is-table(table) }.\]
+ 
+  % code to make equations in figure, at rogercortesi.com\
+  %\rho : on(A,B), on(B,D), on(C,D), table(D)
+  % \{ A / \mathtt{0}, B / \mathtt{2}, C / \mathtt{4} , D / \mathtt{table} \}
+  % \{ A / \phi(\mathtt{0}), B / \phi(\mathtt{2}), C / \phi(\mathtt{4}) , D / \phi(\mathtt{table}) \}
+  % \{ A / \mathtt{1}, B / \mathtt{3}, C / \mathtt{5} , D / \mathtt{table} \}
+  
+ 
+The next lemma establishes the equivalence
+of the states produced by taking isomorphic ground actions in equivalent states.
+
+\begin{lemma}\label{lemma1} Let ${s_1}$ and ${s_2}$ be equivalent states.
+If two actions  $a_1 \in  z|_{s_1}$ and $a_2 \in z|_{s_2}$ 
+  are isomorphic according to the definition of isomorphic actions, then the successor states $\gamma_i(a_1, s_1)$ and 
+  $\gamma_i(a_2, s_2)$ determined
+ by their respective outcomes are equivalent.
+\end{lemma}
+
+\vspace{0in}\emph{Proof.} By definition, for a given outcome $i$ of $z$, $\gamma_i(a_1, s_1) = s_1 \cup add_i(a_1) \setminus
+del_i(a_1)$, so:
+\begin{eqnarray*}
+\phi(\gamma_i(a_1, s_1)) & = & \phi( s_1 \cup add_i(a_1) \setminus del_i(a_1)) \\
+& = & \phi( s_1 ) \cup  \phi(add_i(a_1)) \setminus \phi(del_i(a_1))\\
+& = & s_2 \cup add_i(a_2) \setminus del_i(a_2)\\
+& = & \gamma_i(a_2, s_2)\\
+\mathrm{thus,}\ \gamma_i(a_1, s_1) & \sim & \gamma_i(a_2, s_2)
+\end{eqnarray*}
+\hfill$\Box$
+
+
+Now we almost have all the pieces to state the main theorem. We know that
+equivalent schema applications, in equivalent current states, produce equivalent successor
+states. Now, we must show that a sequence of schema applications can
+be replaced by an equivalent sequence to produce equivalent ending states.
+\vspace{.3in}
+\begin{defn}[Equivalent Planning Procedures] \emph{
+    Let P be a planning procedure such at at each state $s$, P selects
+    an action $a$. Consider a planning procedure P' such that at each
+    state $\tilde{s} \sim s$, P' chooses an action $\tilde{a} \sim
+    {a}$. Then P and P' are defined to be \emph{equivalent planning
+    procedures}.
+}\label{eqplanners}\end{defn}
+
+\begin{thm} Let P be a complete planning procedure.\footnote{A
+    \emph{complete} planning procedure is one which is guaranteed to
+    find a path to the goal if one exists.}.
+    Any planning procedure P' \emph{equivalent} to P is also a
+complete planning procedure. That is,
+\[ \forall \tilde{a_i} \in [a_i], \gamma(a_1,\ldots,a_n, s_0) \rightarrow g \Rightarrow \gamma( \tilde{a_1},\ldots,\tilde{a_n}, s_0)
+\rightarrow g\ . \]
+\label{theorem1}
+\end{thm}
+\vspace{0in}\emph{Proof.}
+%inductive proof. proof is given for the deterministic case. should
+%say something about distributions over outcomes.
+We prove the theorem by induction.  First, consider the initial
+step. If $a_1$ in $s_0$ is equivalent to
+$\tilde{a_1}$ in $s_0$, then
+$\gamma(a_1, s_0) \sim \gamma(\tilde{a_1}, s_0) $
+(by Lemma~\ref{lemma1}).
+Next, we need to show that if $a_{i+1}$ in
+$\gamma(a_1,\ldots,a_i,  s_0)$ is equivalent to $\tilde{a}_{i+1}$ in
+  $\gamma(\tilde{a_1},\ldots,\tilde{a_i}, s_0)$, then
+$\gamma(a_1,\ldots,a_{i+1},  s_0) \sim
+\gamma(\tilde{a_1},\ldots,\tilde{a}_{i+1}, s_0)$.
+Again, Lemma~\ref{lemma1} guarantees that 
+\begin{eqnarray*}
+ \gamma(a_{i+1}, \gamma(a_1,\ldots,a_i,  s_0)) & \sim &
+ \gamma(\tilde{a}_{i+1}, \gamma(\tilde{a_1},\ldots,\tilde{a_i},  s_0)), \textrm{thus,}\\ 
+ \gamma(a_1,\ldots,a_{i+1},  s_0)) & \sim &
+ \gamma(\tilde{a_1},\ldots,\tilde{a}_{i+1},  s_0)).\\
+\textrm{Hence, } \gamma(a_1,\ldots,a_n, s_0) & \sim &
+\gamma(\tilde{a_1},\ldots,\tilde{a_n}, s_0),
+\end{eqnarray*}and by
+Lemma~\ref{lemmasat},
+$\gamma(\tilde{a_1},\ldots,\tilde{a_n}, s_0) \rightarrow g$. \hfill$\Box$
+
+Thus, any plan that existed before
+in the full action space will have an equivalent version in the new, partitioned action
+space.
+
+%% plan parallelism
+Planning in the reduced action space consisting of representatives
+ from each equivalence class preserves completeness.
+ It does, however, have an effect on plan parallelism.  Since we are
+ limited to only one action of each class on each step, a planning procedure that
+ might have used two instances of the same class in parallel would
+ have to serialize them.
+
+
+
+
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+\section{Related Work}
+
+
+The idea of exploiting symmetries in a planning problem to
+reduce the search space is by no means new.
+%fox and long
+Fox and Long present a notion of symmetric states that is used to
+simplify planning \shortcite{fox99,fox02,fox05ijcai}.  At the outset
+of the planning problem, two objects are
+defined to be equivalent if they have the same
+properties in both the initial state and the goal state. In more recent work, object symmetry
+(computed with respect to a pre-specified abstraction of the object
+relationships) is used to supplement the {\sc ff}
+algorithm~\cite{hoffmann01jair} during search.  This work differs from
+ours in that it considers
+%only unary properties of the objects, and
+only those object symmetries that are invariant over the course of the plan.
+
+%guere and alami
+Guere and Alami~\shortcite{guere01ijcai} also try to restrict search by
+analyzing domain structure. In their approach, they define the idea of
+the ``shape'' of a state. A state's shape is given by the
+arrangement of objects in a domain irrespective of the objects' identities.
+An algorithm is given to construct
+all the possible arrangements for a particular domain instance as a
+pre-processing step.  To extract a
+plan/solution, the planning algorithm looks for sequence of
+transformations
+that connects a state in the
+starting shape to a state in the goal shape. While this can
+speed up planning, the downside is
+that the graphical representation of the entire state space can be
+prohibitively large to store. 
+
+%haslum
+The goal of Haslum and Jonsson~\shortcite{haslum00aips} is very
+similar to ours: reduce the number of operators (actions) in order to reduce the
+branching factor and speed up search. They define the notion of
+redundant operator sets. Intuitively, an operator is redundant with
+respect to an
+existing sequence of operators if it does not produce any effects
+different from those already produced by the
+the sequence.  The set of redundant operators, considering sequences
+up to a pre-determined length, are computed before
+starting to plan; however, this is a computation that is 
+{\sc pspace}-hard in general. An approximate algorithm is also given.
+In the familiar blocks-world, for example, this method would remove an atomic
+\emph{move} action, since its effects would be redundant
+to the two-step sequence of
+\emph{pickup} and \emph{putdown} actions.
+Planning efficiency increases when such redundancies are found, even though
+their presence is a function of a given domain specification and
+perhaps not a fundamental characteristic of the problem.  A
+search for this type of redundancy is something that could be used in
+combination with our algorithm, since each approach seeks redundancies of
+different kinds.
+
+Other work that explicitly considers equivalences in problem structure
+includes that of Rintanen~\shortcite{rintanen03icaps}, who has considered
+equivalence at the level of transition sequences for use in SAT-based
+planners. As a pre-processing step, the problem designer defines a
+function $E$ that partitions
+the domain states into classes, and automorphisms are found in the
+graph representing the transitions between all the states.
+A formula is generated to encode when two transition sequences are
+interchangeable, as well as another formula that prevents examining
+two transitions when they are known to be interchangeable. These
+formulae are added to the SAT formula for the planning or model
+checking problem. These formulae can sometimes be quite large, and the
+design function $E$ is left unspecified for any particular application.
+
+
+
+ The approach described in this paper, on the other hand, is intended
+ to be a general method for reducing the action space that can be
+ applied on the fly in a domain-independent manner.  The equivalence
+ classes of actions that are computed at each step produce an action
+ set in a way that can be used by any planning algorithm.  
+
+
+The idea of selective abstraction also has a rich history. Apart from the original work by Dean \etal\ \shortcite{dean95}, our work is perhaps most closely related to that of Baum and Nicholson~\shortcite{baum98}, who consider approximate solutions to MDP problems by selectively ignoring dimensions of the state space in an atomic-state robot navigation domain. The work of Lane and Kaelbling~\shortcite{lane02} also exploits the idea of not exploring all aspects of a problem at once, decoupling local navigation from global routefinding with dedicated, approximate models for each. 
+
+Conceptually, the notion of abstraction by selectively removing predicates was explored early on in work by Sacerdoti~\shortcite{sacerdoti74aij} and Knoblock~\shortcite{knoblock94}. THese approaches produce a hierarchy of ``weakenings'' from the ground problem up. Following explicitly in this vein is work by Armano \etal\ \shortcite{armano03}, who describe an extension of {\sc pddl}  that describes a hierarchy of problems, as well as a semi-automatic method for producing these descriptions.
+ 
+
+
+\section{Conclusions}
+ 
+
+
+\vskip 0.2in
+\bibliography{../bibtex/nhg}
+\bibliographystyle{theapa}
+
+\end{document}
+
+
+
+
+

@@ -1,0 +1,1236 @@
+\documentstyle[jair,algorithm,twoside,11pt,theapa,graphicx,amsthm,amsfonts,amssymb]{article}
+%\input epsf %% at top of file
+
+%\documentclass[jair,11pt]{article}
+
+\jairheading{?}{200?}{1-?}{2/09}{?}
+\ShortHeadings{Adaptive Relational Envelope MDPs}
+{Gardiol \& Kaelbling}
+\firstpageno{1}
+
+%\usepackage{theapa, graphicx, algorithm2e}
+%\usepackage{amsmath, amsthm, amssymb}
+%\usepackage{fancyvrb}
+%\usepackage{url}
+
+
+\newtheorem{thm}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newtheorem{assumption}{Assumption}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}
+
+\newcounter{algorithm}
+
+
+\def\rebp{{\sc rebp}}
+\def\mdp{{\sc mdp}}
+\def\etal{{\it et al.}}
+\def\rebp{{\sc rebp}}
+\def\mdp{{\sc mdp}}
+\def\pomdp{{\sc pomdp}}
+\def\out{{\sc out}}
+\def\strips{{\sc strips}}
+
+\newcommand{\figref}[1]{Figure~\ref{#1}}
+\newcommand{\ntt}[1]{{\small{\tt #1}}}
+\newcommand{\pic}[3]{
+  \includegraphics[scale=#1,angle=#2]{#3}
+}
+
+
+
+
+
+%%
+\def\strips{{\sc strips}}
+\def\rebp{{\sc rebp}}
+\def\mdp{{\sc mdp}}
+\def\amdp{{\sc amdp}}
+\def\etal{{\it et al.}}
+\def\out{{\sc out}}
+
+%command to put things in brackets
+\newcommand{\bk}[1]{ \ensuremath{ \left\{  \hspace{-4pt}
+ \begin{array}{c}
+  #1
+ \end{array} \hspace{-4pt} \right\}  }
+}
+%command to put things in brackets
+\newcommand{\sqbk}[1]{ \ensuremath{
+   \mathsf{[\ #1\ ]}
+}}
+%command to make a rule
+\newcommand{\opmultiline}[6]{
+ \begin{array}{|l|}
+#2\\
+\vspace{-7pt}\\
+%\hspace{10pt}
+\stackrel{ #1 }{\longrightarrow} 
+ \left\{ \begin{array}{ll}
+        #3 & #4 \\
+        #5 & #6
+        \end{array} \right.
+        \end{array}
+
+}
+%command to make a rule
+\newcommand{\opmultilineB}[7]{
+ \begin{eqnarray*}
+\lefteqn{ #2  }\\
+& &
+  \hspace{#7} \stackrel{ #1 }{\longrightarrow} 
+ \left\{ \begin{array}{ll}
+        #3 & #4 \\
+        #5 & #6
+        \end{array} \right.
+        \end{eqnarray*}
+
+}
+\newcommand{\opmultilineC}[6]{
+ \begin{eqnarray*}
+\lefteqn{ when( #1 ) }\\
+& &
+  \hspace{#6} \rightarrow
+ \left\{ \begin{array}{ll}
+        #2 & #3 \\
+        #4 & #5 
+        \end{array} \right.
+        \end{eqnarray*}
+}
+\newcommand{\opmultilineCond}[8]{
+ \begin{eqnarray*}
+\lefteqn{ #2 ) }\\
+& &
+  \hspace{#7} \stackrel{ #1 }{\longrightarrow} 
+ \left\{ \begin{array}{ll}
+        #3 & #4 \\
+        #5 & #6 \\
+           & #8 
+        \end{array} \right.
+        \end{eqnarray*}
+}
+
+\newcommand{\opmultilineCondB}[7]{
+ \begin{eqnarray*}
+\lefteqn{ #2 ) \stackrel{ #1 }{\longrightarrow} }\\
+& & \left\{ \begin{array}{ll}
+           & #7 \\
+        #3 & #4 \\
+        #5 & #6 
+        \end{array} \right.
+        \end{eqnarray*}
+}
+
+\newcommand{\opprettyNoCR}[6]{
+\( #2  \stackrel{ #1 }{\longrightarrow}
+\left\{ \begin{array}{ll}
+        #3 & #4 \\
+        #5 & #6
+        \end{array} \right. \)
+}
+
+%has carriage return (CR) after the condition
+\newcommand{\oppretty}[6]{
+\( \hspace{-.7em} #2 \\
+\stackrel{ #1 }{\longrightarrow}\left\{ \begin{array}{ll}
+        #3 & #4 \\
+        #5 & #6
+        \end{array} \right. \)
+}
+
+
+
+\newcommand{\opdet}[3]{
+\( \begin{array}{l}
+#2 \\
+\vspace{-7pt}\\
+\stackrel{#1}{\longrightarrow} 
+\left\{ \begin{array}{ll}
+        #3
+        \end{array} \right.
+
+\end{array} \)
+}
+
+\newcommand{\pddlstoch}[6]{
+\( \begin{array}{lll}
+%\grt{op}&  \hspace{-10pt}:& \hspace{-4pt} #1 \\
+\multicolumn{3}{l}{#1} \\
+\mathit{pre}& \hspace{-10pt}:& \hspace{-4pt} #2 \\
+\mathit{eff}& \hspace{-10pt}:& \hspace{-4pt} \begin{array}{ll} 
+       \hspace{-4pt} \sqbk{#3} & \hspace{-4pt} #4 \\
+       \hspace{-4pt}  \sqbk{#5} & \hspace{-4pt} #6 
+        \end{array}
+\end{array} \)
+}
+\newcommand{\pddldet}[3]{
+\( \begin{array}{lll}
+\multicolumn{3}{l}{#1} \\
+\mathit{pre}& \hspace{-10pt}:& \hspace{-4pt} #2 \\
+\mathit{eff}& \hspace{-10pt}: &\hspace{-4pt} \sqbk{1.00} \hspace{4pt} #3
+%grt{eff}& \hspace{-10pt}:& \hspace{-4pt} #3
+\end{array} \)
+}
+
+\newcommand{\opa}[4]{
+ \pddldet{ \sym{#1}{#2} }{\paren{#3}}{\paren{#4}}
+}
+
+\newcommand{\opb}[7]{
+ \pddlstoch{ \sym{#1}{#2} }{ \paren{#3} }{#4}{ \paren{#5} }{#6}{ \paren{#7} }
+}
+\newcommand{\opbs}[7]{
+ \oppretty{ \sym{#1}{#2} }{ \sym{}{#3} }{#4}{ \sym{}{#5} }{#6}{ \sym{}{#7} }
+}
+%%
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{document}
+
+\title{Adaptive Relational Envelope MDPs}
+
+\author{\name Natalia H. Gardiol \email nhg@csail.mit.edu \\
+       \name Leslie Pack Kaelbling \email lpk@csail.mit.edu \\
+       \addr MIT CSAIL,\\
+       Cambridge, MA 02139 USA}
+
+% For research notes, remove the comment character in the line below.
+% \researchnote
+
+\maketitle
+
+
+\begin{abstract}
+
+
+We describe a method for using structured representations of the environment's dynamics to constrain and speed up the planning process.  
+Given a problem domain described in a probabilistic logical description language, 
+we develop an anytime technique that incrementally improves on an initial, partial policy. This partial solution is  found by first reducing  the number of predicates needed to represent a relaxed version of the problem to a minimum, and then 
+dynamically partitioning the action space into a set of equivalence classes with respect to this minimal representation. 
+%This results in an efficient planning process that reduces the branching factor wherever possible.
+ Our approach uses the 
+\emph{envelope {\sc mdp}} framework, which creates a Markov decision process out of a subset of the full state space as determined by the initial partial solution. This strategy permits an agent to begin acting
+within a restricted part of the full state space
+and to expand its envelope judiciously as resources permit.
+%Finally, we show how the representation space itself can be elaborated within the anytime framework. 
+\end{abstract} 
+ 
+
+\section{Introduction}
+\label{Introduction}
+
+
+%handling imperfect representations & managing time pressure
+
+For an intelligent agent to operate efficiently in a highly complex domain, it must identify and gain leverage from structure in its domain. Household robots, 
+office assistants, and logistics support systems, for example, cannot count on problems that 
+are carefully formulated by humans to contain only domain aspects actually relevant 
+to achieving the goal. Generally speaking, planning in a formal model of the agent’s 
+entire raw environment will be intractable; instead, the agent will have to find 
+ways to reformulate a problem into a more tractable version at run time. 
+Not only will such domains require an adaptive representation, but adaptive 
+aspirations as well: if the agent is under time pressure to act,  we must 
+be willing to accept some trade-off in the quality of behavior. However, as time goes 
+on, we would expect the agent's behavior to become more robust and to improve in 
+quality. Algorithms with this characteristic are called \emph{anytime} algorithms~\cite{dean88}. Anytime algorithms can operate either off-line (working until a specified time limit) or by interleaving refinement with execution. 
+
+%This work is about taking advantage of structured, relational action representations for planning. Our aim is to make small models of big domains in order to act  efficiently. 
+Consider the task of going to the airport. There are many features available your world view (the current time, what kind of shoes you are wearing, etc), but you might start the planning process by considering only road connections. Then, with a basic route in place, you might then make modifications to the plan by considering traffic levels, the amount of gas currently in the tank, how late you are, and so forth.  The point is that by starting with a reduced representation to solve a principled approximation of the problem, we can begin to act sooner and expect that our solution will improve upon more reflection.
+
+%We will go about this simplification by reducing, if possible, the number of distinct entities and the number of alternative outcomes under consideration. 
+
+The basic idea we are interested in, then, is this: first, find a simple plan; then, elaborate the plan. 
+One early technique in this spirit was proposed by Dean \etal\
+\citeyear{dean95}, who introduced the idea of \emph{envelope \mdp s} in the context of an algorithm called Plexus.
+%One early technique to address this issue was the Plexus algorithm, originally developed by  Dean \etal\ \cite{dean95} for atomic-state \mdp s. 
+Given a planning problem represented as an atomic-state \mdp~\cite{puterman94book}, Plexus
+finds an initial subset of states by executing a depth-first search to the goal, forming a
+restricted \mdp\ out of this subset. The state space for the restricted \mdp\ is called
+the \emph{envelope}: it consists of a subset of the whole system state
+space, and it is augmented by a special state called {\sc out}
+representing any state outside of the envelope.  The algorithm then
+works by alternating phases of \emph{policy generation}, which
+computes a policy for the given envelope, and \emph{envelope alteration}, which adds states to
+or removes states from the envelope.
+This deliberation can produce increasingly robust and sophisticated plans.
+
+
+The difficulty of planning effectively in
+complex problems, however, lies in maintaining an efficient, compact model
+of the world in spite of potentially large ground state and action
+spaces.  %However, since our aim is to compactly represent large problems, 
+This requires moving beyond atomic-state \mdp s. Therefore, we will represent problems in the richer language of \emph{relational} \mdp s and present an extension of the envelope \mdp\ idea into this setting.  One additional advantage of relational representation is that it exposes the structure of the domain in a way that permits modifying, or adapting, the representation with respect to the goal. For example, if our goal of getting to the airport is not merely to arrive there, but to avoid security delays, we might take our shoes into consideration from the outset. 
+
+
+
+Our technique takes the basic envelope \mdp\ idea, but extends it to efficiently handle relational domains. These steps are: 1) reformulating the given problem in terms of the most parsimonious representation, $\beta$ for the given task; 2) finding an initial plan in the space expressed by $\beta$; 3) constructing an \emph{abstract} \mdp\ from the initial subset of states; and, 4) expanding the abstract \mdp\ by both adding new states and/or refining the representation, $\beta$.
+Whereas the original Plexus algorithm refined its plan by manipulating the set of states in an envelope, the Relational Envelope-based Planning approach (\rebp), provides a framework for also modifying the \emph{dimensions} for representing those states. 
+
+
+
+
+\section{Compactly modeling large problems}\label{modeling}
+
+
+
+The problem of planning has been an important research area of {\sc ai}
+since the inception of the field.  However, even its
+``simplest'' setting, that of deterministic {\sc strips} planning, has
+been found to be {\sc pspace}-complete~\cite{bylander94}.
+Nonetheless, with the use of powerful logical
+representations that enable structural features of the state and
+action spaces to be leveraged for efficiency, traditional AI planning techniques are often able to
+manage very large state spaces. Simultaneously, work
+in the operations research community (OR) has developed the framework
+of \mdp s, which specifically addresses uncertainty in dynamical
+systems.  Being able to address uncertainty (not only in acting, but,
+also in sensing, which we do not address in this work) is a primary
+requirement for any system to be applicable to a wide range of
+real-world problems.
+
+Our aim is to bring together some of these complementary features of
+{\sc ai} planning and \mdp\ solution techniques to produce a system that can
+build on the strengths of both.  An important result that enables our
+approach is that problems of goal-achievement, as typically seen in {\sc ai}
+planning problems, are equivalent to general reward problems (and vice
+versa). Thus, it will be possible for us to take a
+given planning planning problem and convert it to an equivalent \mdp ~\cite{majercik03}. 
+
+
+\subsection{Envelope \mdp\ background}
+
+%At a high level, this approach proceeds in two phases.  First, given a
+%planning problem, an initial plan of action must be quickly found.
+%Second, if the agent is given additional time, it can elaborate the
+%original plan by considering deviations from its initial action
+%choices.  \figref{overview} shows a very high-level system diagram of
+%the main parts of this system.
+
+The original Plexus algorithm works by considering a subset of states with which to form a
+restricted \mdp and then searching for an optimal policy in this
+restricted \mdp.  The state space for the restricted \mdp\ is called
+the \emph{envelope}: it consists of a subset of the whole system state
+space, and it is augmented by a special state called {\sc out}
+representing any state outside of the envelope.  The algorithm then
+works by alternating phases of \emph{envelope alteration}, which adds states to
+or removes states from the envelope, and \emph{policy generation}, which
+computes a policy for the given envelope. In order to guarantee the
+anytime behavior of the algorithm, Dean \etal\ extensively study the
+issue of \emph{deliberation scheduling} to determine how best to
+devote computational resources between envelope alteration and policy
+generation.
+
+A small example of refining an initial plan is shown in \figref{smallplan}, which consists of
+a sequence of fringe sampling
+and envelope expansion.  A complete round of deliberation
+involves sampling from the current policy to estimate which
+\emph{fringe} states --- states one step outside of the envelope ---
+are likely. The figure shows the incorporation of  an
+alternative outcome of the policy action
+in which the gripper breaks. After the envelope is expanded to include
+the new state,
+the policy is re-computed.  In the figure, the policy now specifies
+the \emph{fix} action in case of gripper breakage.
+
+Thus, deliberation can produce increasingly sophisticated plans. The 
+initial planner needs to be quick, and as such may not be able to find conditional
+plans, though it can develop one through deliberation; conversely, searching for this conditional plan in the space of all
+\mdp\ policies, without the benefit of the initial envelope, could potentially
+have taken too long.
+
+
+
+\begin{figure}
+  \centerline{
+\pic{.46}{0}{../figures/deliberation_example_forsinglecolumn_noactions.pdf}}
+\caption{A toy example of envelope-based planning. The task is to make a two-block stack in a domain with
+two blocks. The initial plan is consists of a single \emph{move} action, and the initial envelope (far left) reflects this action sequence. The next step is to sample from this policy, and the potentially bad outcome of breaking the gripper is noticed (middle). After expanding the envelope to include this outcome, the policy is revised to include executing a ``repair'' action from the newly incorporated state (far right). }
+\label{smallplan}
+\end{figure}
+
+
+
+The Plexus algorithm was originally developed for atomically represented robot-navigation domains, which generally have the characteristics of high solution density, low dispersion rate (i.e., a small number of outgoing transitions at each state), and continuity (i.e., that the value of a state can be reasonably estimated by considering nearby states).   These features made it reasonable to execute a depth-first search in order to find the first set of states for the envelope. Arbitrary relational planning domains may not necessarily share these characteristics.  
+
+
+
+
+\subsection{Representation issues in MDPs}
+
+Much preceding work on finding policies for \mdp s considered
+a state to be an atomic, indivisible entity. 
+More recently, advances have been made in representing a
+\mdp\ states in terms of \emph{factored} state spaces: that is, a
+particular state is seen to be a combination of state features.
+However, though a factored state representation is an improvement over an
+atomic state representation, it still has limitations. The state
+features correspond to \emph{propositions} about a
+state: e.g., ``the $x$-coordinate has value 3.''  This means that the
+policy $\pi$, the transition function $T$, and the reward function $R$
+must cover possible
+combinations of values of all of the state features.  Having large number of features, or features that can take on a wide range of values, becomes problematic as the size of the state space grows combinatorially.  
+
+In this work, %we take advantage of a more compact way of representing actions and state transitions. That is, 
+rather than a thinking of a state as being composed of a
+set of propositional features, we think of it as being composed
+instead of a set of logical relationships between classes of domain objects.
+Because these predicates can make assertions
+about logical \emph{variables}, a single predicate may in fact
+represent a large group of ground propositions.  Thus,  a
+single transition rule in a logical language may represent multiple ground state transitions.   
+ If the transition function and the reward function have a compact representation that can be exploited for efficiency during planning,  then that makes it possible to be relatively insensitive to the size of the state space. 
+
+
+
+
+\subsection{Encoding Markovian dynamics with rules}\label{rmdpdef}
+
+
+
+
+  A well-specified {\sc ai} planning problem contains two basic elements: a domain description and a problem instance.
+The domain description specifies the {\em dynamics}
+of the world, the \emph{types} of objects that can exist,
+and the set of logical \emph{predicates} which comprise the set of
+relationships and properties that can hold for the objects in this
+domain.  
+ To specify a given problem instance, we need an
+{\em initial world state}, which is the set of ground predicates that are
+initially true for a given set of objects. We also need a
+{\em goal condition,} which is a first-order sentence that defines 
+the task to be achieved.  
+The dynamics of the domain must be 
+expressed in a particular rule language. In our case, 
+the language used is the
+Probabilistic Planning and Domain Definition Language ({\sc ppddl}) of Younes and Littman
+\citeyear{younes04tr}, which extends the classical 
+ \strips\
+language~\cite{fikes71,kushmerick95aij} to probabilistic domains. 
+We will use the term ``rule'' or ``operator'' when we mean an abstract rule such as it appears in the domain description, and we will use ``action'' to denote a ground instance of a rule.
+
+
+A domain description together with a particular problem instance induce a \emph{relational} \mdp\ for the problem instance. 
+An classical \mdp\ is defined as a tuple, $\langle
+\mathcal{Q,A,T,R}\rangle$ where: $\mathcal{Q}$ is a set of states;
+$\mathcal{A}$ is a set of
+actions; $\mathcal{T}$ is a transition function; and $\mathcal{R}$ is a reward function.
+
+By extension, we 
+define a relational \mdp\ ({\sc rmdp}) as a tuple $\langle \mathcal{P,Z,O,T,}\mathit{R} \rangle$, consisting of a set of states, actions, transitions, and rewards: 
+
+\begin{description}
+\item[States:] The set of states $\mathcal{Q}$ in an {\sc rmdp} is defined by a finite set
+$\mathcal{P}$ of relational predicates, representing the 
+relations that can hold among the finite set of domain objects,
+$\mathcal{O}$. Each {\sc rmdp} state is an \emph{interpretation}
+of the domain predicates over the domain objects.
+ 
+\item[Actions:] Analogously, the set of ground actions, is induced, by the
+  set of rules $\mathcal{Z}$ and the objects in the world. 
+  
+\item[Transition Dynamics:] The transition dynamics are given by a
+compact set of rules $\mathcal{Z}$ as given in the domain description.
+ A rule is said to apply in a state if its precondition is true in
+the interpretation associated with the state.
+ 
+For each action, the distribution over
+next states is given compactly by the distribution over outcomes encoded in
+the rule schema.  The rule
+outcomes themselves usually only specify a subset of the domain
+predicates, effectively describing a set of possible resulting
+ground states.  To fill in the rest, we assume a static frame: state predicates
+not directly changed by the rule are assumed to remain the same.
+
+\item[Rewards:] A state is mapped to a scalar reward
+  according to function $R(s)$.
+  \end{description}
+
+
+\subsection{Example: describing a planning domain}
+
+
+
+To ground the discussion, let us consider an example using one of our test domains, the ``slippery'' blocksworld.
+This domain is an extension of the standard blocks world
+%~\footnote{The IPC-4 version of blocks world is available at \url{www.cs.rutgers.edu/~mlittman/topics/ipc04-pt/}.}
+in which some blocks (the green ones) are ``slipperier'' than the other blocks.  The pick-up and put-down actions are augmented with a conditional effect that produces a different distribution on successful pick-up and put-down when the block in-hand is green. While color may be ignored for the purposes of sketching out a solution quickly, higher quality policies result from detecting that the color green is informative~\cite{gardiolphd}.
+%~\footnote{The full {\sc ppddl} description of this and all domains can be seen in~\cite{gardiolphd}.}
+
+The domain description contains the \emph{types} of objects available in the world (in this case, blocks and tables), and a list of the relationships that can hold between objects of particular type (e.g., $on(A, B)$, where $A$ is a Block and B is a block or a table).
+Finally, the rules in the slippery blocks domain consist of two operators, each containing a conditional effect that can produce a different outcome distribution, as in~\figref{sblocks-rules}.
+
+\begin{figure}
+%\vspace{1em}
+\begin{tabular}{l}
+$pickup(A,B)$ : \vspace{-1em}\\
+\begin{minipage}[l]{37em}
+\opmultilineCond{}{\hspace{-2em} on(A,B)\wedge \forall C. \neg holding(C) \wedge \forall D. \neg on(D, A)}{ .9}{ holding(A) \wedge \neg on(A,B)}{ .1}{ on(A, table) \wedge \forall E. \neg on(A, E)}{0em}{ \begin{minipage}[r]{24em}{\oppretty{}{\hspace{-1em}when( isgreen(A)) }{ .6}{ holding(A) \wedge \neg on(A,B)}{ .4}{ on(A, table) \wedge \forall E. \neg on(A, E)}} \end{minipage} } 
+\end{minipage} \\ 
+\\
+$put(A,B)$ : \vspace{-1em} \\
+\begin{minipage}[l]{37em}
+\opmultilineCond{}{\hspace{-2em} holding(A) \wedge A \neq B \wedge \forall C. \neg on(C, B)}{ .9}{ \neg holding(A) \wedge on(A,B)}{ .1}{  \neg holding(A) \wedge on(A, table)  }{0em}{ \begin{minipage}[r]{24em}{\oppretty{}{\hspace{-1em}when( isgreen(A)) }{ .6}{ \neg holding(A) \wedge on(A,B) }{ .4}{  \neg holding(A) \wedge on(A, table) } } \end{minipage} } 
+\end{minipage}
+\end{tabular} %\vspace{1em}
+\caption{Example operators from the slippery blocksworld domain. Both the \emph{pickup} and the \emph{put} rules contain a conditional effect that produces a different outcome distribution when the block being held is green.}
+\label{sblocks-rules}
+\end{figure}
+A particular problem instance consists of a ground initial state, such as, e.g.: \\
+
+
+\begin{minipage}[c]{30em}
+\begin{center}
+\texttt{\footnotesize{
+on(block0,block2),
+on(block2,table),
+on(block4,table),
+isblue(block0),
+isred(block2),
+isblue(block4)
+}} \end{center} \end{minipage}
+
+\vspace{1em}
+
+and a goal, such as:
+ \[ \forall B. type(B, block) \wedge on(B, table), \]
+ \hspace{1.5em}or,
+  \[ \exists B1. type(B1, block) \wedge \exists B2. type(B2, block) \wedge B1 \neq B2 \wedge on(B1, B2) \wedge on(B2, table) . \footnote{Unless the context is ambiguous, we will henceforth leave objects' \emph{type()} specifications implicit.}\]
+
+
+
+\pagebreak
+
+\pagebreak
+\section{Equivalence-based planning}
+
+\begin{figure}
+  \centerline{\pic{.45}{0}{figs/eqeg.pdf}}
+  \caption{{\small In the original set of predicates  representing the problem, $\beta_{full}$, states $s_1$ and $s_2$ are distinct. But in the reduced basis $\beta_{min}$, without colors, an isomorphism $\Phi$ can be found between the state relation graphs $G_{s1}$ and $G_{s2}$.} }
+\label{basismin}
+\end{figure}
+ 
+ 
+ 
+
+In developing an envelope \mdp\ approach for the relational case, the first task is to find a suitable method for finding the initial envelope of states. The original Plexus algorithm did this by executing a depth-first search to the goal; in an arbitrary planning problem, however, this may be a poor strategy.
+However, because our planning task is expressed as an {\sc rmdp}, with the transition dynamics as a set of logical rules, then we can exploit techniques from classical {\sc ai} planning to find an initial envelope more efficiently.
+
+%cite initial algorithm, and extension w/min pred set
+
+The complexity of classical planning is driven primarily by the length of the
+solution and the branching factor of the search.  The solution length
+can sometimes be effectively reduced using hierarchical techniques.
+The branching factor can often be reduced, in effect, by an efficient
+heuristic.  The equivalence-based planning of Gardiol and Kaelbling~\citeyear{gardiol07} algorithm provides a novel method for reducing the
+branching factor by dynamically grouping the agent's actions into
+\emph{state-dependent equivalence classes}, and only considering a single
+action from each class in the search.  This method can dramatically
+reduce the size of the search space, while preserving correctness and
+completeness of the planning algorithm.  It can be combined with
+heuristic functions and other methods for improving planning speed.
+
+\subsection{Assumptions and definitions}
+
+To be precise, we will review some assumptions and definitions introduced by Gardiol and Kaelbling:
+
+
+\begin{assumption}[Sufficiency of Object Properties]
+  A domain object's function is assumed to be determined solely by its
+properties and relations to other objects, and not by its
+name.\label{identity_assumption}
+\end{assumption}
+
+
+The algorithm uses a graph isomorphism-based definition of equivalence among states. 
+State equivalence is determined by representing a state $s$ as a \emph{state relation graph}, $G_s$, where each node in the graph represents an object in the domain and each edge between nodes represents a relation between the corresponding objects. Nodes are labeled by their \emph{type} and with any unary relations (or properties) that apply to them. 
+ 
+More formally, the definitions are as follows:
+\begin{description}
+\item [State equivalence]
+Two \emph{states} $s_1$ and $s_2$ are {\em equivalent}, denoted
+  $s_1 \sim s_2$, if there exists
+ an isomorphism, 
+ $\phi$, between the respective state relation graphs:
+ $\phi(\mathcal{G}_{s_1})=\mathcal{G}_{s_2}$.
+\end{description}
+
+Intuitively, two objects are equivalent to each other if they 
+are related in the same way to other objects that are, in turn, equivalent. Thus, two \emph{objects} $o_{1}$ and $o_{2}$, in states $s_{1}$ and $s_{2}$ respectively, are defined to be equivalent if $o_{2}$ is the image of $o_{1}$ under an isomorphism that maps $s_{1}$ to $s_{2}$.
+
+
+We use the notation $\gamma(a,s)$ to refer to the state that results from taking action $a$ in state $s$.
+If $a$ is an action following the {\sc pddl} syntax, then we calculate $\gamma(a,s)$ by removing from $s$ all the atoms in $a$'s \emph{delete list} and adding all the atoms in $a$'s \emph{add list}.
+We will sometimes refer to this calculation of $\gamma(a,s)$ as ``propagating'' $s$ through the dynamics of $a$. 
+More precisely, we write: 
+
+ \[ \gamma(a, s))  =  \phi( s \cup add(a) \setminus del(a)), \]
+
+Where $del(a)$ refers to set the atoms that are negated in the effect of $a$, and $add(a)$ refers to the set of atoms that are non-negated in the effect of $a$.
+
+With respect to a given state $s$, then, we define two ground actions  $a_1$ and
+  $a_2$ to be
+equivalent if they produce equivalent successor states,  $\gamma(a_1,s)$ and $\gamma(a_2,s)$:
+ 
+
+\begin{description}
+\item [Action equivalence] Two \emph{actions} $a_1$ and
+  $a_2$ are {\em equivalent} in a state $s$, denoted $a_1 \sim a_2$,
+  iff $\gamma(a_1,s) \sim \gamma(a_2,s)$ 
+  \end{description}
+
+
+% is this necessary?
+However, using this definition to directly calculate a set of of equivalent actions: it requires propagation of the state through each action's dynamics in order to look for pairs of resulting states that are equivalent.  This is unwieldy. A better tactic is to {\em overload} the notion of isomorphism to apply to actions and develop a test on the starting state and actions directly, without propagation.  In {\sc ppddl} and related formalisms, actions can be thought of as ground applications of predicates.  Thus, each argument in a ground action will correspond to an object in the state, and, thus, to a node in the state relation graph. So, two actions applicable in a state $s$ are provably equivalent if: (1) they are each ground instances of the same operator, and (2) there exists a mapping $\phi(s) = s$  that will map the arguments of one action to arguments of the other. In this case, since the isomorphism $\phi$ that we seek is a mapping between $s$ and itself, it is called an {\em automorphism}.  We compute action equivalence via the notion of action isomorphism, defined formally as follows:
+
+
+\begin{description}
+\item [Action isomorphism] Two actions $a_1$ and
+  $a_2$ are {\em isomorphic} in a state $s$, denoted $a_1 \sim_s a_2$, 
+ iff there exists an automorphism for s, 
+ $\phi(s)=s$, such that $\phi(a_1)=a_2$.
+ \end{description}
+
+It can be shown that the application of
+isomorphic actions in equivalent states produces equivalent successor
+states. Thus, isomorphic actions are equivalent actions. It is straightforward to prove that a sequence of actions can be replaced by a sequence of equivalent actions to produce equivalent ending states.
+Thus, using a complete planning procedure, such as forward search, with a reduced action space consisting of \emph{canonical representatives}
+ from each equivalence class preserves completeness of the original planning procedure with the full action set. 
+ 
+ We will describe a state or action \emph{canonical} as canonical to mean that it is a member, and thus represents, an equivalence class of states or actions. How the canonical state or action is selected is immaterial to the algorithm; any member of the class is sufficient. We will use the bracket notation $[o]$ to denote that the object $o$ represents the class of objects equivalent to $o$.
+ 
+ The original envelope-based algorithm is based on forward search with the Fast Forward heuristic~\cite{hoffmann01jair}, which is a complete search procedure.\footnote{While not affecting completeness, reducing the action set can have an effect on plan parallelism.  Since the algorithm is
+ limited to only one action of each class on each step, a planning procedure that
+ might have used two instances of the same class in parallel would
+ have to serialize them.}
+ 
+ 
+
+
+\subsection{Extending equivalence-based forward search}
+
+
+ % It works by representing each class of states and actions by a single canonical exemplar and planning only within the space of exemplars, rather than in the original, ground state and action spaces. 
+ % This technique produces a provably complete planning algorithm and can keep the number of effective actions from increasing combinatorially in large domains. 
+ %The particular choice of canonical, or representative, member is arbitrary, since they are interchangeable; the point is simply that a single member stands for a whole class.
+
+
+%%%
+
+
+In this paper, we will extend the power of state equivalence by  allowing the representational vocabulary of the state relation graph itself to be adaptive. The motivation is that the fewer predicates we have in our representation, the fewer edges or labels there will be in the state relation graph, resulting in more states being considered equivalent. 
+
+
+
+Specifically, the planning process begins by making two simplifications. First, as before, is a deterministic approximation of the original planning problem: operators are assumed to deterministically produce their most likely outcome.
+Second, however, is the identification of the minimal set of predicates, or basis, necessary to solve a relaxed version of the problem.  We mean ``relaxed'' in the sense of the well-known Fast-Forward heuristic ({\sc ff})of Hoffman and Nebel~\citeyear{hoffmann01jair}, the heuristic used by the forward-search algorithm to guide the search.
+Computing the heuristic value of the initial state gives a lower bound on the number of steps required to achieve the goal.  It also gives an estimate of the smallest set (though not the order) of actions necessary to achieve the goal from the initial state.
+The minimal basis is found by taking this set of actions and including only those predicates that appear in the goal statement and in the preconditions of those  actions. The planning problem is then reformulated with respect to this minimal basis set, $\beta$.  See \figref{basismin} for an example of formulating a ground state with different bases. 
+
+
+ 
+The extended equivalence-based forward search algorithm is given in Algorithm~\ref{rebpfs}. 
+%The output is a sequence of actions for reaching a goal state from the initial state.
+By extending the machinery of the envelope-deliberation framework, which we will see shortly, $\beta$ can be subsequently refined and augmented to improve policy robustness.
+
+%%%UNCOMMENT ME
+%[ALGORITHM]
+\begin{algorithm}
+%%\linesnotnumbered
+%\dontprintsemicolon
+\SetVline
+\SetKwData{In}{{\bf Input}} 
+\SetKwInOut{Out}{{\bf Output}}
+\In{Initial state $s_0$, goal condition $g$, set of rules $Z$}
+\Out{Sequence of actions from $s_0$ to a goal state}
+Find a minimal representational basis, $\beta$ \;
+Find canonical initial state, $\tilde{s_0}$ \;
+Initialize agenda with $\tilde{s_0}$ \;
+\While{agenda is not empty}{
+	Select and remove a state $s$ from the agenda \;
+	\eIf{$s$ satisfies goal condition $g$}{
+		\Ret{path from root of search tree to $s$ \;}
+	}{
+		Find representative set $\mathcal{A'}$ of actions applicable in $s$ \;
+		\ForEach{$a \in \cal{A'}$}{
+		Add the successor of $s$ under $a$ to
+  the agenda \;
+		}
+	}
+}
+%\vspace{.1in}
+\caption{Equivalence-based forward-search algorithm. $\mathcal{A'}$ denotes the set of \emph{canonical} actions with respect to $\beta$; each canonical action stands for an equivalence class of actions.}
+\label{rebpfs}
+\end{algorithm} 
+
+
+
+
+
+
+
+
+\section{Computing an abstract envelope}
+%chapter 6
+
+ 
+
+
+
+Now we will use the output of the forward search, which is a deterministic sequence of actions, 
+to bootstrap an {\sc mdp} and directly address uncertainty in the domain. 
+The output of the planning phase, above, is a sequence of canonical actions, which induces a sequence of canonical states. The canonical states are represented in 
+a basis set of predicates that may be smaller than or equal to the set of predicates 
+originally given in our domain description. 
+
+
+We will use this abstract state sequence to initialize an abstract envelope {\sc mdp}, which we will manipulate this envelope \mdp\ in two ways: first, as in the original Plexus algorithm, we will sample from our policy and incorporate states off the initial path; second, new to this work, we will incorporate additional dimensions to the representation to increase the accuracy of the estimated value of the current policy. 
+
+
+
+Constructing an \mdp\ with abstract states introduces an additional subtlety to the algorithm: it is possible that the dynamics driving the transition between abstract states may differ depending on which underlying ground states are participating in the transition. 
+Thus, each transition probability is properly represented as an interval rather than a scalar probability. Interval \mdp s, and the corresponding Interval Value Iteration algorithm, were first shown by 
+Givan {\em et al.}~\citeyear{givan97bounded,givan00boundedaij}.
+
+
+Let us formally define an abstract-state, interval envelope \mdp\ (called an {\sc amdp} for short) as an extension of the basic relational \mdp.
+% we saw in Section~\ref{rmdpdef}. 
+
+An {\sc amdp} $M$ is a tuple  $\langle \mathcal{Q,\beta,Z,O,T,}\mathit{R} \rangle$, where:
+
+\begin{description}
+\item[States:] The full abstract state space,  $\mathcal{Q}^*$,  is defined by a basis set
+$\beta$ of relational predicates, representing the 
+relations that hold among the equivalence classes of domain objects, $\mathcal{O}$. 
+The set of states $\mathcal{Q}$, is the union of the set  
+$\mathcal{Q}' \subseteq \mathcal{Q}^*$ and a special state $q_{out}$. That is, 
+$\mathcal{Q} = \mathcal{Q}' \cup \{\mathit{q}_{out}\} $.  The set $\mathcal{Q}'$, also called the \emph{envelope}, is a subset of the entire abstract state space, and  $q_{out}$ is an additional special state that captures transitions from any  $q \in \mathcal{Q}'$ to a state outside the envelope. Through the process of envelope expansion, the set of states  $\mathcal{Q}$ will change over time.
+
+\item[Actions:] The set of actions, $\mathcal{A}$,  is calculated by finding the ground instances of the
+  set of rules $\mathcal{Z}$ applicable in  $\mathcal{Q}'$.
+  
+
+\item[Transition Dynamics:] In an interval \mdp, $\mathcal{T}$ gives the interval of probabilities that a state and action pair will transition to another state: $  \mathcal{T}: \mathcal{Q} \times \mathcal{A} \times \mathcal{Q} \rightarrow [\mathbb{R},\mathbb{R}]. $ We will see how to compute this transition function in the sections below.
+
+\item[Rewards:] As before, state is mapped to a scalar reward
+  according to function $R(s)$.
+  \end{description}
+
+
+
+\subsection{Initializing the abstract-state envelope}
+
+In this section, we look at how to compute the initial set of states $\mathcal{Q}$ by bootstrapping from the output of the planning phase. 
+
+Each state $q_i \in \mathcal{Q}'$ of our {\sc amdp} $M$ is a composite structure consisting of:
+\begin{enumerate}
+\item $\tilde{s}_i$: a canonical state, in which we represent only the canonical members of each object equivalence class and the relations between them.
+\item $S_i$: a set of underlying ground states, $s_{i}$, consistent with the above canonical state. As we will see below, these underlying ground states will be collected as we go.
+\end{enumerate}
+
+The first state, $q_0$, is computed from the initial state of the planning problem straightforwardly: the set $S_0$ is initialized with the ground initial state of the planning problem, and the canonical state 
+$\tilde{s}_0$ is the canonical representative, with respect to basis $\beta$.
+
+We compute the second state, $q_1$, by taking the first action, $a_0$, in our plan. The next canonical state $\tilde{s}_1$  is computed by propagating $\tilde{s}_0$ through $a_0$.
+% by the procedure described in Section~\ref{statepropagation}.
+ The ground state of $q_0$ can be efficiently propagated as well, and, we add the result to $S_1$. This procedure is repeated until we've processed the last action. 
+More formally, the procedure to compute the envelope, with respect to basis $\beta$, from a plan $p$ is in Algorithm~\ref{initabs}.
+
+
+%%%% UNCOMMENT ME
+%[ALGORITHM]
+\begin{algorithm}
+%%\linesnotnumbered
+%%\SetNoFillComment
+%%\dontprintsemicolon
+\SetVline
+%\SetKw{Break}{break}
+%\SetKw{True}{True}
+%\SetKw{Not}{not}
+\SetKwData{In}{{\bf Input}} 
+\SetKwInOut{Out}{{\bf Output}}
+\In{Canonical initial state $\tilde{s_0}$, Plan $p$, Basis $\beta$}
+\Out{Set of envelope \mdp\ states $\mathcal{Q}'$ }
+Initialize $q_0$ with  $\tilde{s}_0$\ and with $S_0 = \{ s_0 \}$ \;
+Initialize $\mathcal{Q}' = \{ $$q_0$$ \}$ \;
+\ForEach{action $a_i$ in $p$, $i = 0  \ldots n$}{
+	Propagate $\tilde{s}_{i}$ to obtain $\tilde{s}_{i+1}$ \;
+	Propagate each $s_{i}$ in $S_{i}$ to obtain  $s_{i+1}$ \;
+    Initialize  $q_{i+1}$ with $\tilde{s}_{i+1}$ and with  $S_{i+1} = \{ s_{i+1} \}$ \;
+	%Add $q_{i+1}$ to $\mathcal{Q}'$: 
+	$\mathcal{Q}' = \mathcal{Q}' \cup \{$$q_{i+1}$$\}$ \;
+ }
+%\vspace{.1in}
+\caption{Computation of envelope given a plan.}
+\label{initabs}
+\end{algorithm}
+%\end{figure}
+%%%%%
+
+
+ At this point, we have a set of \mdp\ states $\mathcal{Q}' = $$\cup_{i=0}^{n+1}$$\{ q_i\}$.
+ %, each of which contains a single ground state $s_i$ associated with that \mdp\ state.  In addition to the set of envelope states, we also have a special {\sc out} state, which represents the penalty associated with the unknown states outside of the envelope.
+ To complete the set of states, $\mathcal{Q}$, we add the special state $q_{out}$.
+
+
+This procedure lets us keep a record of the true ground state sequence, the $s_i$'s, as we construct our model. Why do this, when we've gone through so much trouble to compute the canonical states? The problem is not that any individual ground state is too large or difficult to represent, but that the search space over all the ground states is prohibitive in combination. Nonetheless, conserving ground information is necessary in order to determine how to modify the basis set down the line.
+
+While each \mdp\ state tracks its underlying ground state, it is only the canonical state that is used for determining behavior. Since a canonical state represents a collection of underlying ground states, the policy we compute using this approach effectively encompasses more of the state space than we physically visit during the planning process.
+
+
+
+
+
+\subsection{Computing transition probabilities}
+
+Given a set of states $\mathcal{Q}$, the next step is to compute the transition function $\mathcal{T}$. 
+First, we compute the \emph{nominal} interval probabilities of transitioning between the canonical states.  The nominal probabilities represent the best estimate of the intervals given the abstract model and the current ground information stored in the model.  Second, we sample from our underlying state space to flesh out the interval of probabilities describing each transition.  That is, we start from the ground state, and sample a sequence of ground transitions. If any of these sampled transitions corresponds to an action outcome with a probability outside of the current interval estimate,  we add that informative ground state to the collection of ground states associated with the corresponding abstract state, and update the interval accordingly. 
+We will speak of \emph{updating} a probability interval $P = [ a, b ]$  with the probability $p$, which means: if $p < a$, then $P$  becomes 
+$[p,b]$; if $p > b$, then $P$  becomes  $[a, p]$.
+We adopt a sampling approach, rather than an analytic approach based on rule syntax, to avoid having to use, e.g, theorem proving, to decide whether two logical outcomes in fact refer to equivalent successor states.
+These two steps, the nominal interval computation and the sampling estimation, are executed as part of a loop that includes the envelope expansion phase: each time a new state is added, it will be necessary to re-estimate the transition probabilities.
+
+
+We compute the nominal interval probabilities by:
+
+\begin{enumerate}
+\item For each state $q_i \in \mathcal{Q}$, find the set of actions $A_i$ applicable in $\tilde{s}_i$. 
+\item For each action $a_{k} \in A_i$ and state $q_j \in \mathcal{Q}'$ compute the transition probability between $q_i$ and $q_j$:
+\begin{enumerate}
+\item  Initialize the ground transition probability. That is, take the first ground state  in $S_i$ and propagate it through action $a_{k}$. 
+If the resulting ground state is equivalent to $q_j$ with respect to the basis $\beta$, and $p$ is the probability of the outcome of $a_k$ corresponding to that transition, then set 
+the probability of transitioning from $q_i$ to $q_j$ via action $k$ as the interval $P_{ijk} = [p, p]$. 
+\item For each remaining ground state $s^{i}_n \in S_i$, compute the probability $p'$ of transitioning to $q_j$ via action $a_k$.\footnote{Strictly speaking, we will need to use the inverse of the mapping $\phi$ between $s$ and $\tilde{s}_i$ to translate the action $a_k$ into the analogous action applicable in $s$.  This is because, while $s$ may belong to the equivalence class of states represented by $\tilde{s}_i$, it may have objects of different actual identities belonging to each object equivalence class.}
+\emph{Update} interval $P_{ijk}$ with $p'$.
+\end{enumerate}
+
+\item Compute the probability of transitioning to $q_{out}$ from $q_i$ and $a_k$. This involves keeping track, as we execute the above steps, of the overall out-of-envelope probability for each ground application of the action $a_k$. More precisely: for each $s \in S_i$, when we apply $a_k$ and detect a transition of probability $p$ to a state within the envelope, we update  $a_k$'s out-of-envelope probability with $1-p$. This ensures that the out-of-envelope probabilities are consistent for each representative action, $a_k$.
+
+\end{enumerate}
+
+\figref{trans1} shows an example of an abstract \mdp\ M after the initial round of nominal interval computation.  In this example, the initial world state is $s^{0}_{0}$. The goal is to put three blocks in a stack, regardless of color, and the forward-search has returned the sequence: $pickup(3, table)$, $put(3,1)$.  The abstract \mdp\ has been computed from this plan to produce the set of states induced by this action sequence, and the collection $S_i$ of each abstract state contains only a single element at this point. 
+
+%We also must keep track of one more probability: that of transitioning out of the envelope given a state $i$, an action $k$, and an action outcome $n$: $O_{ikn}$. Because we are now dealing with intervals, this is calculation is a bit more complicated than in the original Plexus approach. In step 1 above, $n$ ranges from $1$ to the number of outcomes of $a_k$. The intervals $O_{ik1}\dots O_{ikn}$  are initialized to $[1,0]$. Then, with every transition from state $q_i$ and action outcome $l$ that leads to some state in the envelope with probability $p$, $O_{ikl}$  is updated with $1-p$.   
+
+%The above procedure computes the basic transitions and transition probabilities for our \mdp. 
+
+Next, in order to improve the interval estimates, a round of sampling is done from the current model. The idea is to try to uncover, via this sampling, any ground states that yield transition probabilities outside of the current interval estimates.
+This proceeds as follows:
+\begin{enumerate}
+\item For each state $q_i \in \mathcal{Q}'$, action $a_k \in A_i$, and state $q_{j \neq i}  \in \mathcal{Q}'$:  let the ground state $s'$ be the result of propagating a state $s^{i}_n \in S_i$ through $a_k$.
+	\begin{enumerate}
+	
+	\item If there exists a state $q_k$ such that the probability of transitioning from $s'$ to $q_k$ under an action is outside of the current interval for transition of $q_j$ to $q_k$ for that action,
+	add $s'$ to the set $S_j$ of $q_j$.
+	\end{enumerate}
+\end{enumerate}
+
+The result of carrying out this procedure is show in~\figref{trans2}.
+
+
+\begin{figure}
+  \centerline{\pic{.19}{0}{figs/transprob1.pdf}}
+  \caption{{\small  The abstract \mdp\ after computing the nominal transition probabilities. For simplicity, we only show a subset of the possible actions. For example, the action $pickup( [1], [2] )$, which is applicable in state $\tilde{s}_0$, would have a transition to  \out\  with probability $[1.0, 1.0]$ since there is no state in the current model that represents the outcome of taking this action. } }
+\label{trans1}
+\end{figure}
+ 
+\begin{figure}
+  \centerline{\pic{.19}{0}{figs/transprob2.pdf}}
+  \caption{{\small  The abstract \mdp\ after a round of sampling to update transition interval estimates.  State $s'= s^{1}_1$ } was sampled from $s^{0}_0$, and it yielded a transition probability to $\tilde{s}_2$, outside of the current estimate of $P_{120}$ (assuming the action $put([3], [1])$ has index $0$ for  $\tilde{s}_1$). Thus, we add ground state $s^{1}_1$ to the collection $S_1$ and update our estimate for $P_{120}$. }
+\label{trans2}
+\end{figure}
+
+
+\section{Changing the representation}
+
+At this point, we know how to construct an \amdp\  with an abstract state space and with probabilities represented as intervals. Because of the anytime nature of the algorithm, it is possible to carry out Interval Value Iteration on this model and begin acting according to it.
+If, however, there is computation time available, it may be beneficial to add a predicate, or set of predicates, into the basis $\beta$ in order to tighten these intervals and  lessen the uncertainty in the value estimates. In addressing the issue of modifying the basis,  we are confronted very naturally with a type of \emph{structure search} problem, which we describe next.
+
+The point of augmenting the basis set is to be able to express transition probabilities, and thus the expected value of a policy, more precisely.  To construct a procedure for modifying the basis,  
+we begin by noting that the transition probabilities are encoded in the rule schemas given as part of our domain description. Therefore, in our case, a $\beta$ that is missing some potentially useful predicates will lack the capacity to determine the applicability of either an action containing such predicates or a conditional outcome depending on such predicates.  
+For example, consider the slippery blocks world: the minimal basis may ignore color completely, depending on the goal.  While this minimal representation speeds up the planning by allowing blocks of different colors to be put into the same equivalence class, it does not model the fact that blocks of color green will experience a different transition probability via the conditional outcome of the pick-up and put-down actions.
+
+So, to propose candidate predicates to augment the current $\beta$, the operator examines its precondition and/or conditional effects, and it proposes a set of predicates missing from $\beta$. 
+For example, consider the $pickup$ operator,  which has the condition $isgreen(A)$ on an effect. To produce a new representation $\beta'$ which can determine if the condition is applicable,  then the operator must propose the set (which may simply be a singleton) of required predicates missing from the current $\beta$. In the case of our example, this is simply the predicate $isgreen()$.  If more than one additional predicate is required to express a condition (e.g., $isgreen(A) \wedge isblue(B)$), then a classic structure search problem occurs: no benefit will be observed by augmenting $\beta$ with $isgreen$ until $isblue$ has also been added. Thus, because we know we are dealing with rule schemas of this sort, we can take the shortcut of proposing complete sets of missing predicates for a given condition.
+ 
+
+%The basic mechanism for proposing a change is to take a transition we are interested in refining, and, asking the operator associated with that transition to suggest some predicates.
+%How do we choose a transition to refine? We may sort them by width, or by highest predicted penalty, or by highest predicted cost, and so on.
+
+The natural place in the algorithm in which to augment the representation is as a part of the envelope-refinement loop.  In this loop, we keep a sorted list of the transitions in our \amdp\ with the maximally uncertain transitions at the top.\footnote{We could imagine sorting this list by other metrics. For example, we could be risk-averse and sort them by the lower value bound.} Then, to propose a refinement, we get the top transition and compute the operator's proposal as described above.
+
+
+%The second opportunity comes when we reach a representational ``failure'' point. In the process of sampling from actions that were not originally in our optimistic plan, and, thus, made no contribution the original choice of basis, computing their effects might have unexpected results. For example, we may produce an outcome state that has no applicable actions. We call this a ``failure'' point, and we deal with it as follows. First, we re-route the trajectory that leads to this state  
+%We do this by iterating backward from the failed state until we either reach the initial state, or, a state that has more than one incoming transition. At this point, we 
+%to the {\sc out} state instead. Then, starting from the offending state, we work our way backwards through the transitions until we find a transition with that has a non-empty predicate set to propose. If we do find one, we add this proposal to the list of candidate predicate sets.  Then, the next time the \mdp\ considers a new proposal, it selects from this list. 
+
+
+
+
+
+%%%% UNCOMMENT ME
+%[ALGORITHM]
+%\vspace{.in}
+%\begin{figure}[ht]
+\begin{algorithm}
+%\linesnotnumbered
+%\SetNoFillComment
+%\dontprintsemicolon
+\SetVline
+%\SetKw{Break}{break}
+%\SetKw{True}{True}
+%\SetKw{Not}{not}
+\SetKwData{In}{{\bf Input}} 
+\SetKwInOut{Out}{{\bf Output}}
+%\Titleofalgo{rebp}
+\In{Init. state $s_0$, Goal condition $g$, Set of rules $Z$}
+\Out{An abstract MDP, $M$}
+
+ Compute minimal basis representation, $\beta$ \;
+ Let plan P = {\sc rebp}ForwardSearch( $s_0$, $g$, $Z$ ) \; %\tcc*[f]{Algorithm \ref{rebpfs}} \;
+ \Begin{%(Initialize envelope \mdp\ $M$ with $P$ and $\beta$ :){
+       Initialize envelope \mdp\ $M$ with $P$ and $\beta$  \;
+	Compute transitions and transition probabilities for $M$ \;
+	Do interval value iteration in $M$ until convergence \;
+ }
+ Initialize a list of \mdp s $m = \{ M \}$ \;
+ \While{have time to deliberate}{
+ 	\ForEach{ \mdp\ $M_i$ in $m$}{
+		Do a round of envelope expansion in $M_i$ \;
+		\uIf{failure to find applicable action in a state $q'$}{
+			Remove the $q'$ from $M_i$ \;
+			Select the first non-empty proposal basis, $\beta'$, corresponding to the sequence of actions between $q'$ and $q_0$ \;
+			\lIf{$\beta'$ not empty} append to the front of the list of proposals, $l_i$\; 
+		}
+		\Else{
+			Sort transitions of $M_i$ in descending order \;
+			Compute a proposal basis $\beta'$ from the top transition \;
+			\lIf{$\beta'$ not empty} append $\beta$ to end of list $l_i$ \;
+		}
+		
+	 	%\Begin(Policy improvement in \mdp\ $M_i$:){
+			\vspace{.1in}
+			Do interval value iteration in $M_i$ until convergence \;
+	 	%}
+		\If{$l_i$ not empty}{
+			Select a basis $\beta'$ from the list \;
+			Construct a new \mdp\ $M'$ with plan $P$ and basis $\beta'$. \;
+			Append $M'$ to list $m$ of \mdp s.\;
+		}
+	}
+	
+		\vspace{.06in}
+	Sort the list $m$ by decreasing average policy value \;
+	Let $M$ be the {\sc mdp} at the top of the list $m$ \; 
+ }
+%\vspace{.1in}
+\caption{Overall {\sc repb} algorithm.}
+\label{overallalg}
+\end{algorithm}
+%\end{figure}
+%%%%%
+
+Once we have a proposal to try, we initialize a \emph{new} \amdp\ using the original plan and the \emph{new} basis. Then, the regular phases of policy improvement and envelope expansion happen for both \amdp s in parallel. 
+We can add as many parallel \amdp s as desired.  In our current implementation, we set the limit at  $n$=5 interval \amdp s in parallel.  The reason for keeping a number of \amdp s in parallel is that the basis-refinement algorithm is greedy. The first time a proposal is requested from the first abstract \amdp\, the interval with the widest range is chosen. But it might turn out to be that the second and third proposals jointly produce the highest-performing representation. An \amdp\ tracks its proposals and does not make the same one twice. We would never discover this better performing representation if we only kept the first modification.
+Again, this is a common structure search issue. Keeping a list of the top performing \amdp s is a simple way of avoiding local minima caused by greedy search, but certainly more sophisticated search control should be considered.
+
+At any given time, the policy of the system is that of the \amdp\ with the highest policy value.
+This approach, called Relational Envelope-based Planning, {\sc rebp}, is given in Algorithm~\ref{overallalg}.
+
+
+
+\section{Experiments}
+
+
+In this section we examine a set of experiments done in three different domains. The objective in each domain is to compute a high-value policy with as compact a model as possible.
+We will look at the various ways of combining the techniques described in this work with the aim of identifying the impact of each on the behavior we observe. The different algorithms are:
+
+
+
+%\begin{table*}
+%\centerline{
+%\begin{tabular}{r*{4}{p{2.3cm}}}\toprule
+%  			& \multicolumn{4}{c}{\textbf{Basis type}} \\ \cmidrule{2-5}             
+% 			& Adaptive 		& Fixed, \linebreak minimal  & Fixed, full & Propositional \linebreak (no classes) \\ \midrule
+% Initial plan	& \ntt{adap-init} 	& \ntt{min-init} & \ntt{full-init} & \ntt{prop-init}\\ 
+% Start state	& \ntt{adap-null} 	& \ntt{min-null} & \ntt{full-null} & \ntt{prop-null}\\ \bottomrule
+%\end{tabular} }
+%\caption{The matrix of experiments. We compared two ways of initializing the envelope \mdp\ --- with the output of the planning phase (``Initial plan''), and with only the initial state (``Start state'') --- with four ways of working with the basis representation. The last column, (``Propositional''), does no equivalence class computations.}\label{exptsmatrix}
+%\end{table*}
+
+
+
+\begin{description}
+\item[Complete Basis + Initial Plan] (\ntt{full-init}): This is the basic relational envelope-based planning algorithm with no basis reduction. A plan is found in the original representation basis, and this plan initializes a scalar-valued envelope \mdp.\\
+\item[ Minimal Basis + Initial Plan] (\ntt{min-init}): This is an extension of {\sc rebp} that first computes a minimal basis set for the representation. No further basis modification is done, so we use a scalar-valued \mdp\ in this approach as well.\\
+item[ Adaptive Basis + Initial Plan] (\ntt{adap-init}): This is the full technique: a minimal basis plus an interval \mdp\ for basis and envelope expansion.\\
+\item[ No initial plan] (\ntt{full-null}, \ntt{min-null}, \ntt{adap-null}): To control for the impact of the initial plan by combining each style of equivalence-class representation with a trivial initial envelope consisting of just the initial planning state.\\
+\item[ Propositional] (\ntt{prop-init}, \ntt{prop-null}): Finally, to control for the impact of the equivalence classes, we initialize a scalar-valued \mdp\ in the full, propositional (no equivalence classes) with an initial plan, and with the initial state, respectively.
+\end{description}
+
+
+
+
+
+
+The domains are:
+
+
+%\item [Blocksworld:] this is simply the standard blocks world, the same one we saw in the second set of experiments in the last chapter. We include this to get a baseline for the algorithms' behavior. The first problem instance contains 5 blocks, and the goal is to put five of them in a stack. The largest domain contains 50 blocks; all have the same goal. The {\sc ppddl} description of this domain was given in~\figref{ppddlbw} on page~\pageref{ppddlbw}.
+\begin{description}
+\item [Slippery blocksworld:] This is the same domain described in section~\ref{modeling}. %~\figref{chap6_bspddl} on page~\pageref{chap6_bspddl}.
+For reference, ground problem size in this domain ranges from $4,000$ states and $50$ actions in the 5-block problem to $3\times10^{79}$ states and $5,000$ actions in the 50-block problem. \\
+\item [Zoom blocksworld:] a different extension of blocks world in which the standard action set is augmented by a one-step \emph{move} action. This action achieves the same effect as, but is less reliable than, a sequence of \emph{pick-up} and \emph{put-down}. However, in order to switch to using the \emph{pick-up} action, the ``holding'' predicate must be in the representation. %~\figref{bz-pddl} on page~\pageref{bz-pddl}.
+The state spaces are the same as the above problem, but the ground action space ranges from $175$ actions in the 5-block problem to $130,000$ actions in the 50-block problem. \\
+\item [MadRTS world:] this domain is an adaptation of a real-time military logistics planning problem.~\footnote{Our {\sc ppddl} version of this  problem was adapted from a scenario originally described by the Mad Doc Software company of Andover, MA in a proposal to address the Naval Research Lab's TIELT military challenge problem~\cite{molineaux}. While no longer taking place in a real-time system, we call this planning domain the MadRTS domain to signal this origin.}
+The world consists of a map (of varying size; six territories in the $b$ problems and $11$ in the $c$), some soldiers (ranging from two to six in each problem series), some enemies (ranging from one to four), and some food resources (from one to five). The goal is to move the soldiers between territories so as to outnumber the enemies at their location (enemies don't move). However, the success of a \emph{move} action depends on the health of the soldier. A soldier can transfer, collect, and consume food resources in a territory in order to regain good health. %~\figref{mad-pddl} on page~\pageref{mad-pddl}.
+Ground problem size ranges from $12,000$ states and $30$ actions in the smallest ($b0$) problem to $1\times10^{20}$ states and $606$ actions in the largest ($c2$).
+\end{description}
+
+
+%\begin{figure*}
+%  \centerline{\pic{.36}{0}{figs/bs-50.pdf}}
+%  \caption{{\small Expected value as a function of \mdp\ size (left) and cpu time (right) in the 50-block ''slippery %blocks world''.}}
+%\label{bs50}
+%\end{figure*}
+
+
+
+Trials were carried out as follows: \rebp\ forward search was executed to find an intial plan, if required, and then an \mdp\ was initialized (with or without an initial partial solution); then, a specified number (about 100) rounds of deliberation were executed. This number was selected somewhat arbitrarily, but it was enough to allow the adaptive-basis and the fixed, minimal-basis algorithms to converge to a locally optimal policy. 
+%and a fixed number (about 900) of execution steps were executed in the simulated domain. 
+To compute the accumulated reward during execution, about 900 steps of simulation were run in each problem (corresponding to roughly 8 successful trials in the blocks worlds), selecting actions according to the policy, and selecting an action randomly \%15 of the time. This was done to see how the policy behaves over a broader part of the state space.
+In the interval \mdp s, action selection is done by choosing the action with the highest \emph{average} value. A reward of $1.0$ was given upon attainment to the goal, and we report the average accumulated reward per step. 
+All results are averaged over 10-12 trials, initialized with different random seeds, for each algorithm. Complete results are available in~\cite{gardiolphd}. %Appendix~\ref{results}. 
+
+
+%To understand the behavior of the algorithms, we plot expected value (taken as the expected value of state $q_0$ in the \mdp, or the average of the interval, in the case of an interval \mdp) vs. the number of states in the \mdp, as a way of showing the value of the policy as a function of the size of the model.  
+%We also plot the same expected value as a function of the computation time (as measured by a CPU-cycle monitoring package). In the experiments which required no computation of a plan first, time is measured from the beginning of the construction of the initial \mdp; for those that did, the first data point is plotted also after construction of the \mdp\ plus the amount of time spent planning. An example of a typical outcome is seen in~\figref{bs50}. 
+%\figref{bs50} contains a plot of value vs. number of \mdp\ states for the adaptive and the full (fixed) basis algorithms in the 50-block slippery blocks world. 
+% The adaptive-basis approaches (\ntt{adap-init} and \ntt{adap-null}) are able to model the range in expected value, as can be seen by the bars on the curve. This results in a policy which generally performs better during execution. Additionally, we note that the envelope expansion benefits greatly from the compaction of the state space resulting from the smaller basis.  The complete-representation approach,  (\ntt{full-null}, not plotted), which distinguishes all the colors of the blocks and begins with an empty envelope,  is unable to get off the ground even in the smallest domain instance, which contains seven blocks. However, in the much larger 50-block domain, \ntt{adap-null} and \ntt{min-null} are still able to produce a reasonable model.
+ 
+ 
+ 
+ 
+
+
+
+\begin{figure*}
+  \centerline{\pic{.5}{0}{figs/bs-rew-adap.pdf}\pic{.5}{0}{figs/bz-rew-adap.pdf}}
+  \centerline{ \pic{.5}{0}{figs/madb-rew-init.pdf}\pic{.5}{0}{figs/madc-rew-init.pdf}}
+  \caption{{\small Comparison of accumulated reward for the initial-plan-based algorithms.}}
+\label{bsrew}
+\end{figure*}
+
+
+
+
+\begin{figure}\center{
+
+\begin{tabular}{ccccc}
+\multicolumn{5}{c}{Slippery} \\ \hline
+Domain Size & \ntt{prop-init} & \ntt{full-init} & \ntt{min-init} & \ntt{adap-init}\\  \hline
+ 5	& .089	& .090 	& .092	& .088  \\
+ 7 	& .093	& .092	& .091 	& {\bf .104}  \\  
+ 10	& .105	& .110	& .105 	& .110  \\  
+ 15	& -		& .092	& .106 	& {\bf .111}  \\  
+ 20	& -		& -		& .105 	& {\bf .111}  \\ 
+ 30	& -		& -		& .110 	& .110  \\
+ 50	& -		& -  	& .110 	& .111  \\
+  	&   	&	  	& 32 states &  25 states \\
+   	&   	&	    & 350 sec   &  400 sec
+ \end{tabular}
+
+
+
+\begin{tabular}{ccccc}
+\multicolumn{5}{c}{Zoom} \\ \hline
+Domain Size & \ntt{prop-init} & \ntt{full-init} & \ntt{min-init} & \ntt{adap-init}\\  \hline
+ 5	& .140	& .150 	& .105	& .151  \\
+ 7 	& .140	& .151	& .115 	& .152  \\  
+ 10	& .138	& .140	& .101 	& {\bf .153}  \\  
+ 15	& -		& -		& .110 	& {\bf .155}  \\  
+ 20	& -		& -  	& .114 	& {\bf .143}  \\
+  	&   	&	  	& 54 states &  34 states \\
+   	&   	&	   	& 280 sec   &  560 sec
+ \end{tabular}
+
+
+
+\begin{tabular}{ccccc}
+\multicolumn{5}{c}{MadRTS - World B} \\ \hline
+Domain Size & \ntt{prop-init} & \ntt{full-init} & \ntt{min-init} & \ntt{adap-init}\\  \hline
+ b0	& .086	& .099	& .110 	&  .106  \\  
+ b1	& .066	& .090	& .108 	&  .106  \\  
+ b2	& .080	& .091 	& .108 	&  .107  \\
+  	&   	&	  	& 25 states & 19 states \\
+   	&   	&	   	& 20 sec   &  25 sec
+ \end{tabular}
+
+
+
+\begin{tabular}{ccccc}
+\multicolumn{5}{c}{MadRTS - World C} \\ \hline
+Domain Size & \ntt{prop-init} & \ntt{full-init} & \ntt{min-init} & \ntt{adap-init}\\  \hline
+ c0	& .061	& .067	& .077 	& .078  \\  
+ c1	& .031	&  -	& .062 	& .061  \\  
+ c2	&   -	&  - 	&  - 	& {\bf .054}  \\
+  	&   	&	  	&  		&  41 states \\
+   	&   	&	   	&   	&  500 sec
+ \end{tabular}
+ }
+ \caption{{\small Full numerical results corresponding to \figref{bsrew}.}}
+\label{bsnum}
+\end{figure}
+
+
+ 
+ Figure~\ref{bsrew} shows the accumulated reward (averaged per step) obtained during execution in the simulated domains. 
+ Due to space limits, we do not show the corresponding results for the null-envelope approaches, since they generally performed poorly compared to the initial-plan-based approaches.
+ In addition,
+ %we also indicate some average running times and \mdp\ sizes 
+ %: the running time refers to the amount of time taken to complete the specified number of deliberation rounds (including planning time, if applicable), approximately 100 rounds for each algorithm. After the number of rounds was completed, deliberation was stopped and  
+ for those algorithms that achieved a non-zero policy, we indicate the approximate average size of the \mdp\ at convergence to this policy and the computation time. If a data point is missing from the graph, the trials ran out of memory before finishing the specified number of deliberation rounds.
+ 
+ In the Slippery blocks-world, the adaptive-basis approach performs slightly better since it can incorporate the \ntt{green} predicate in order to distinguish the green blocks and formulate a policy to avoid them. In the Zoom blocks-world, the difference is more marked: the adaptive-basis approach can formulate a completely new policy out of the more reliable \emph{pick-up} and \emph{put-down} actions, avoiding the less reliable, but faster, single-step \emph{zoom} action. The representation in the fixed-minimal-basis approach contains the necessary predicates to enable the \emph{zoom} action but not \emph{pick-up}. In the MadRTS experiments, being able to identify a minimal predicate set proved crucial to gain traction in the domain.
+We also note that, in general, the adaptive-basis algorithms are able to provide the highest expected value for a given model size. 
+ 
+ 
+%\begin{figure*}
+%  \centerline{\pic{.4}{0}{figs/bs-rew-adap.pdf}\pic{.4}{0}{figs/bs-rew-null.pdf}}
+%  \centerline{\pic{.4}{0}{figs/bz-rew-adap.pdf}\pic{.4}{0}{figs/bz-rew-nul.pdf}}
+%  \centerline{ \pic{.4}{0}{figs/madb-rew-init.pdf}\pic{.4}{0}{figs/madc-rew-init.pdf}}
+%  \caption{{\small Comparison of accumulated reward.}}
+%\label{bsrew}
+%\end{figure*}
+
+%\begin{figure*}
+%  \centerline{\pic{.5}{0}{figs/bs-rew-adap.pdf}\pic{.5}{0}{figs/bs-rew-null.pdf}}
+%  \caption{{\small Comparison of all algorithms in the Slippery Blocksworld domain.}}
+%\label{bsrew}
+%\end{figure*}
+%\begin{figure*}
+%  \centerline{\pic{.5}{0}{figs/bz-rew-adap.pdf}\pic{.5}{0}{figs/bz-rew-nul.pdf}}
+%  \caption{{\small Comparison of all algorithms in the Zoom Blocksworld domain.}}
+%\label{bzrew}
+%\end{figure*}
+%\begin{figure*}
+%  \centerline{\pic{.5}{0}{figs/madb-rew-init.pdf}\pic{.5}{0}{figs/madc-rew-init.pdf}}
+%  \caption{{\small Comparison of the four initial-plan algorithms in two variations of the MadRTS domain.}}
+%\label{madrew}
+%\end{figure*}
+
+
+The essential message from these experiments is:
+\begin{enumerate}
+	\item Equivalence classes improve the efficiency of envelope expansion.
+	\item Adapting the basis can yield more accurate and better performing model for a given \mdp\ size.	
+	\item Finding minimal basis representation, in conjunction with an initial plan, produces the highest expected value per number of states in the \mdp. 
+\end{enumerate}
+	In general, better policies are found when gradually elaborating an initial solution than are found by trying to solve a problem all at once.  The
+equivalence classes further aid this elaboration because they constrain the sampling done in the envelope \mdp\ during envelope expansion. 
+
+\section{Related Work}
+
+The idea of selective abstraction has a rich history. Apart from the original work by Dean \etal\ \citeyear{dean95}, our work is perhaps most closely related to that of Baum and Nicholson~\citeyear{baum98}, who consider approximate solutions to MDP problems by selectively ignoring dimensions of the state space in an atomic-state robot navigation domain. The work of Lane and Kaelbling~\citeyear{lane02} also exploits the idea of not exploring all aspects of a problem at once, decoupling local navigation from global routefinding with dedicated, approximate models for each. 
+
+Conceptually, the notion of abstraction by selectively removing predicates was explored early on in work by Sacerdoti~\citeyear{sacerdoti74aij} and Knoblock~\citeyear{knoblock94}. THese approaches produce a hierarchy of ``weakenings'' from the ground problem up. Following explicitly in this vein is work by Armano \etal\ \citeyear{armano03}, who describe an extension of {\sc pddl}  that describes a hierarchy of problems, as well as a semi-automatic method for producing these descriptions.
+ 
+\section{Conclusions}
+ 
+
+We have described a technique for  bootstrapping the solution of planning problems in uncertain domains by implementing envelope-based planning as an \amdp. The bootstrapping is done by taking advantage of a formalism for planning with equivalence classes of objects which is dynamic, domain-indpendent, and works under arbitrarily complex relational structure.  We have also presented some experiments that show the advantage of this anytime approach to  refinement of policy. To our knowledge, this is a novel approach to planning in relational domains, and the initial results presented show promise for planners of this kind.
+
+
+
+However, since the work described in this paper is an initial step towards planners of this kind, there are many ways in which the approach could be improved.
+
+\subsection{Improving the forward search}
+
+As our implementation currently stands, the biggest bottleneck in the forward-search algorithm, which is implemented as a best-first search with random tie-breaking, is the heuristic evaluation of states.  This is because we have modified the FF heuristic to be an \emph{admissible heuristic}, which ultimately yields solutions of optimal length, but which involves searching the relaxed plan graph for the \emph{shortest} relaxed plan. As a result, depending on the order of the search, this is a potentially exponential operation.  We discuss these ramifications next. 
+
+\subsubsection{Impact of action commutativity}\label{commut}
+
+In logistics-style domains, there is a greater potential for actions that could be executed in parallel, or, irrespective of order. For example, in a sequential plan, it may not matter which we do first: either hoist a crate at the first depot, or move a truck towards the depot.  While our equivalence-class analysis eliminates such permutations among objects of the same class (and thereby realizes considerable efficiency gains), it does not do so for structurally distinct objects, nor does it eliminate permutations in order among parallelizable action sequences.  As a result, the heuristic computation in these domains, because it seeks to optimize for the shortest path, becomes more costly. 
+
+This issue is discussed by Haslum and Geffner~\citeyear{haslumgeffner00} and Korf~\citeyear{korf98}, who suggest a solution based on imposing a fixed ordering on such actions.  
+If the {\sc rebp} approach is to be extended efficiently into a greater variety of domains, this is one issue that must be addressed.
+
+\subsubsection{Other admissible heuristics}
+
+There are other admissible heuristics that may be more efficient to compute than our adaptation of the FF heuristic.  For instance, Haslum and Geffner describe a family of heuristics that trades off informativeness with efficiency of 
+computation~\citeyear{haslumgeffner00}. Edelkamp~\citeyear{edelkamp01} surveys this approach and others but finds that, in heuristic search planning, the heuristics are either not admissible, or, admissible but too weak. Edelkamp proposes by contrast an approach based on pattern databases\cite{edelkamp01,korf98}. Pattern databases are pre-computed tables of distances between abstractions of states. Edelkamp's approach is appealing in that it finds optimal plans if possible, and approximates the optimal solution in more challenging planning problems (in propositional, deterministic settings); however, space consumption grows rapidly --- for example, searching for solutions in benchmark blocks-world domains of more than 13 blocks grinds to a halt the various optimal, general planners studied.
+
+Thus, how to improve the efficiency of the heuristic for a larger variety of domains while preserving its informativeness is a key open question.  It is also important to recognize that no one heuristic is best suited for all types of domains --- some may be more effective in logistics-style domains, others for puzzle-style domains, and so on. 
+
+\subsubsection{Considering non-optimal planning}
+
+The impact of {\sc rebp} seems largest in the area of optimal planning, in which the shortest solution must be found, since {\sc rebp} provides a way to reduce branching factor without losing optimality.
+
+However, in Edelkamp's study~\citeyear{edelkamp01}, as well as in our own experience and that of other researchers,  FF's approach to finding approximate (non-optimal) solutions via hill-climbing is a time-effective approach in large problem instances.  The experiments presented in this work were constructed to illustrate the properties of our algorithm specifically when planning difficulty is a function of increased problem size and not of increased solution length; but, there are vast numbers of planning problems out there who are not necessarily guaranteed to scale in this way.
+
+One way to move in this direction may well be to use object equivalence classes in conjunction with the non-admissible FF heuristic. This would produce a plan faster, but it could be a longer solution. However, after discovering this initial solution, {\sc rebp} can then invoke the anytime envelope expansion phase, which may proceed to discover a shorter solution given more computational resources.  This is a tactic we have not yet explored.
+
+
+\subsection{More aggressive approximations}
+
+
+The purpose of minimizing the set of predicates used to represent the planning problem was to force more objects into the same equivalence class and, thus, approximate the original planning problem with a smaller one.  This approach turned out to be effective in our experiments, but it is only a rudimentary start based on a simple syntactic analysis of the goal sentence and action preconditions. It may be profitable to investigate other ways of calculating approximate representations. Learning may play an important role here, as discussed in a later section.
+
+Furthermore, as problems increase in size and complexity, it will be necessary to consider approximations to the isomorphism-based equivalence we have developed for objects. For example, approximate graph isomorphism is an idea investigated in a  recent paper by 
+Fox~\etal ~\citeyear{foxlong07aaai}.  Additionally, at the risk of including an even more complex problem into the inner loop of our algorithm, it may be possible to find a more generalizable notion of equivalence in considering isomorphism or approximate isomorphism over \emph{substructures} of graphs rather than whole graphs.  Finally, one might consider other types of distance metrics on graphs, such as kernel functions of structured data~\cite{vishwanathan04kb,haussler99tr,gartner03ilp,gartner04mlj}.
+While a distance function on states might put more actions into the same equivalence class, it is less obvious how to use it to produce object equivalence classes, or whether it would be compatible with the incremental computation of object equivalence classes we have described. 
+
+\subsection{Improving the envelope expansion}
+
+In the original paper on the Plexus algorithm~\citeyear{dean95}, Dean \etal\ describe various techniques for estimating the value of incorporating a new state into the envelope \mdp. If a candidate state is not expected to improve the expected value much, then it is not added to the envelope.  Our implementation is simpler: all candidate states are accepted during envelope expansion. Thus, there is nothing to stop the envelope from growing, in the limit, to the size of the abstract state space. Obviously, this is a concern in large domains, and it would be beneficial to incorporate some kind of value analysis to this step.
+
+Furthermore, now that we are dealing with relational domains --- instead of the atomic-state domains of the original Plexus algorithm --- it may be that a factored or hierarchical approach to the the envelope and basis expansion would be worth considering. For example, it may make little sense to search for refinements between trucks, routes, and crate-contents all at the same time, as is currently  done.
+
+The basis expansion, in particular, may  benefit from a sensitivity analysis. In the current implementation, we base our search for the refinement of the predicate set based on the width of the transition probability intervals. However, if this wide interval is in a part of the state space with relatively low risk or reward, why bother refining it? It would be more worthwhile to refine instead those intervals with the greatest impact on the value estimate.
+
+Finally, there is the question of how to most efficiently compute the transition probability intervals.  We have chosen a method based on sampling from the underlying state space, which, while having the advantage of simplicity and fidelity to the state space in question, comes with a computational cost. It may be worth considering computing these intervals analytically, by syntactic analysis of the rule schemas.
+
+\subsection{The role of learning}
+
+Learning is absent from {\sc rebp}, but there are many aspects which might benefit from it. 
+For example, the idea of reducing the number of actions under consideration by minimizing the basis predicate set brings to mind the idea of \emph{affordances}~\cite{gibson77}; that is, the types of actions that are possible to effect on an object. There is the idea that people are able to restrict the number of affordances they consider for an object as a function of their  
+motives~\cite{bernedo06}.  Would it be possible to learn to ``see'' objects as equivalent, given the role that they play in eventually achieving a goal?
+This may yield more adaptive approaches than our current idea of computing a minimal basis set of predicates before beginning to plan. 
+
+\subsection{Completeness, correctness, convergence, and complexity}
+
+Finally, what can we say about the computational characteristics of the full \rebp\ algorithm? 
+
+We have theoretical guarantees on the planning side as long as we use the full predicate set. What happens when we use a reduced predicate set?  The computation of the reduced predicate set simply guarantees that we will be able to solve a relaxed plan, but it guarantees nothing about being able to solve the non-relaxed version. A mechanism for dealing with possible failures of this type will need to be investigated.
+
+This approximation of the state space also affects the \amdp\ computation. What are the convergence properties for an abstract, interval envelope Markov decision process? It seems plausible to expect so, but, we have not proved whether Dean and Givan's analysis for bounded-parameter \mdp s~\cite{givan97bounded} holds this case.
+
+A thorough complexity analysis of the algorithm is also open. On the forward-search side: the algorithm is, in the worst case, exponential in the branching factor. On the \amdp\ side, the greatest bottleneck is in testing for state equivalence when doing the sampling to improve the transition probability interval estimates.  However, computing isomorphisms is not a limiting bottleneck in practice~\cite{miyazaki96}. What we have observed is that, if an isomorphism is not present, the computation tends to fail quickly. Thus, we only seem to pay the full cost of the computation in the case where the cost is able to be offset by its long-term benefits.  Being able to characterize and guarantee this observation, however, is important and open future work. 
+
+Nonetheless, it seems hard to avoid computational complexity when dealing with inherently hard problems such as planning, which is at least {\sc pspace}-complete even in the propositional, deterministic case~\cite{bylander94}.  The best we can hope for is not to let unnecessary complexity get the better of us. The work described here is one step towards that goal.
+
+
+
+
+
+\vskip 0.2in
+\bibliography{../bibtex/nhg}
+\bibliographystyle{theapa}
+
+\end{document}
+
+
+
+
